@@ -124,7 +124,7 @@ class HomeViewController: UIViewController {
         //Assign the backgroundview frame to be the entirety of the header view
         backgroundView.frame = headerView.bounds
         
-        //=====Add Instagram logo
+        //=====Add  logo
         
 //        let logoImageView = UIImageView(image: UIImage(named: "send"))
 //        headerView.addSubview(logoImageView)

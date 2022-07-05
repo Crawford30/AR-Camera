@@ -148,13 +148,6 @@ extension CameraConfiguration {
             }
             
             
-            
-//            let delayTime = dispatch_time(dispatch_time_t(DispatchTime.now()), Int64(5 * Double(NSEC_PER_SEC)))
-//            dispatch_after(delayTime, dispatch_get_main_queue()) {
-//                print("stopping")
-//                self.movieOutput.stopRecording()
-//            }
-            
         }
         
         DispatchQueue(label: "setup").async {

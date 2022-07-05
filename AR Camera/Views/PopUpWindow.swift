@@ -14,12 +14,10 @@ class PopupWindow: UIViewController{
         super.init(nibName: nil, bundle: nil)
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overFullScreen
-        
+    
         popUpWindowView.popupTitle.text = title
-        //popUpWindowView.popupText.text = text
         popUpWindowView.popupTextField.text = text
         popUpWindowView.popupButton.setTitle(buttonText, for: .normal)
-        
         popUpWindowView.popupButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         
         //Add popup window to ViewController
@@ -76,10 +74,7 @@ private class PopUpWindowView: UIView {
         popupTextField.textColor               = UIColor.white
         popupTextField.font                    = UIFont.systemFont(ofSize: 16.0)
         popupTextField.keyboardType            = UIKeyboardType.alphabet
-//        popupTextField.placeholder             = "Tag"
         popupTextField.attributedPlaceholder  =  NSAttributedString(string: "Tag")
-//        popupTextField.textAlignment           = .left
-        
 
         
         //Popup Button
@@ -89,7 +84,6 @@ private class PopUpWindowView: UIView {
         
         
         popupView.addSubview(popupTitle)
-        //popupView.addSubview(popupText)
         popupView.addSubview(popupTextField)
         popupView.addSubview(popupButton)
         
@@ -118,16 +112,7 @@ private class PopUpWindowView: UIView {
         
         ])
         
-        //Popup TextField Constraints
-//        popupTextField.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            popupTextField.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: Constants.borderWidth),
-//            popupTextField.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -Constants.borderWidth),
-//            popupTextField.topAnchor.constraint(equalTo: popupView.topAnchor, constant: Constants.borderWidth),
-//            popupTextField.heightAnchor.constraint(equalToConstant: 55)
-//        ])
-        
-        
+
         popupTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             popupTextField.heightAnchor.constraint(equalToConstant: 44),
