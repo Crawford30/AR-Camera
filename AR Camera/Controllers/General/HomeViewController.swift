@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
         return header
     }()
     
-    
+   //MARK: -  RECORDING SCREEN
     private let goToRecordVideoButton: UIButton = {
         let button =  UIButton()
         button.setTitle("Record Video", for: .normal)
@@ -29,6 +29,8 @@ class HomeViewController: UIViewController {
     }()
     
     
+    
+    //MARK: - RECORDING LIST
     private let recordingListButton: UIButton = {
         let button =  UIButton()
         button.setTitle("Recording List", for: .normal)
@@ -47,6 +49,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view
         goToRecordVideoButton.addTarget(self, action: #selector(didTapRecordButton), for: .touchUpInside)
+        recordingListButton.addTarget(self, action: #selector(didTapRecordingListButton), for: .touchUpInside)
     }
     
     
@@ -105,6 +108,22 @@ class HomeViewController: UIViewController {
             guard let window = view.window else { return }
             window.layer.add(transition, forKey: kCATransition)
             controller.modalPresentationStyle = .fullScreen
+            present(controller, animated: false, completion: nil)
+        
+    }
+    
+    
+    //MARK: - Go To Recording List
+    @objc private func didTapRecordingListButton(){
+        Utilities.vibrate()
+        let controller = RecordingListViewController()
+        let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromLeft
+            guard let window = view.window else { return }
+            window.layer.add(transition, forKey: kCATransition)
+//            controller.modalPresentationStyle = .fullScreen
             present(controller, animated: false, completion: nil)
         
     }
