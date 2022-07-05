@@ -143,9 +143,10 @@ class HomeViewController: UIViewController {
     private func addSubviews(){
         view.addSubview(recordingListButton)
         view.addSubview(goToRecordVideoButton)
-        view.addSubview(headerView)
+        //view.addSubview(headerView)
         
     }
+    
 
 }
 
