@@ -124,17 +124,7 @@ class HomeViewController: UIViewController {
         //Assign the backgroundview frame to be the entirety of the header view
         backgroundView.frame = headerView.bounds
         
-        //=====Add  logo
-        
-//        let logoImageView = UIImageView(image: UIImage(named: "send"))
-//        headerView.addSubview(logoImageView)
-//        logoImageView.contentMode = .scaleAspectFit
-//        logoImageView.frame = CGRect(
-//            x: headerView.width/4.0,
-//            y: view.safeAreaInsets.top,
-//            width: headerView.width/2.0,
-//            height: headerView.height-view.safeAreaInsets.top)
-        
+    
         
     }
     

@@ -10,6 +10,11 @@ import Photos
 
 class CameraViewController: UIViewController {
     
+    enum direction {
+        case right
+        case left
+    }
+    
     let docsDir: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! //documnet directory
     var popUpWindow:PopupWindow!
     var filename: String =  ""
@@ -99,6 +104,7 @@ class CameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         self.cameraConfig = CameraConfiguration()
         cameraConfig.setup { (error) in
             if error != nil {
@@ -163,29 +169,30 @@ class CameraViewController: UIViewController {
             showToast(message: "Could not save!! \n\(error)", fontSize: 12)
         } else {
             
-//            let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
-//
-//            let saveAction = UIAlertAction(title: "OK",
-//                                   style: UIAlertAction.Style.default) { (action: UIAlertAction) in
-//
-//                               if let alertTextField = alertController.textFields?.first, alertTextField.text != nil {
-//                                   print("And the text is... \(alertTextField.text!)!")
-//                                   //str.trimmingCharacters(in: .whitespacesAndNewlines)
-//                                   let replaced  = video.replacingOccurrences(of: "output", with: alertTextField.text!)
-//                                   let formattedString = replaced.trimmingCharacters(in: .whitespacesAndNewlines).safeDatabaseKey()
-//                                                  print("TAG: \(formattedString)")
-//                               }
-//             }
-//
-//            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
-//                    (action : UIAlertAction!) -> Void in })
-//            alertController.addTextField { (textField : UITextField!) -> Void in
-//                    textField.placeholder = "Enter Tag Here"
-//                }
-//                alertController.addAction(saveAction)
-//                alertController.addAction(cancelAction)
-//
-//            self.present(alertController, animated: true, completion: nil)
+            
+            let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
+        
+            let saveAction = UIAlertAction(title: "OK",
+                                   style: UIAlertAction.Style.default) { (action: UIAlertAction) in
+
+                               if let alertTextField = alertController.textFields?.first, alertTextField.text != nil {
+                                   print("And the text is... \(alertTextField.text!)!")
+                                   let formattedString = alertTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).safeDatabaseKey()
+                                                  print("TAG: \(formattedString)")
+                                   
+                                   self.filename = formattedString
+                               }
+             }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
+                    (action : UIAlertAction!) -> Void in })
+            alertController.addTextField { (textField : UITextField!) -> Void in
+                    textField.placeholder = "Enter Tag Here"
+                }
+                alertController.addAction(saveAction)
+                alertController.addAction(cancelAction)
+                
+            self.present(alertController, animated: true, completion: nil)
             
             showToast(message: "Saved", fontSize: 12.0)
         }
@@ -218,33 +225,7 @@ class CameraViewController: UIViewController {
                     }
                     
                     print("URL: \(url)")
-                    
-                    
-                    let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
-                
-                    let saveAction = UIAlertAction(title: "OK",
-                                           style: UIAlertAction.Style.default) { (action: UIAlertAction) in
-
-                                       if let alertTextField = alertController.textFields?.first, alertTextField.text != nil {
-                                           print("And the text is... \(alertTextField.text!)!")
-                                           //str.trimmingCharacters(in: .whitespacesAndNewlines)
-                                           //let replaced  = video.replacingOccurrences(of: "output", with: alertTextField.text!)
-                                           let formattedString = alertTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).safeDatabaseKey()
-                                                          print("TAG: \(formattedString)")
-                                           
-                                           self.filename = formattedString
-                                       }
-                     }
-                    
-                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
-                            (action : UIAlertAction!) -> Void in })
-                    alertController.addTextField { (textField : UITextField!) -> Void in
-                            textField.placeholder = "Enter Tag Here"
-                        }
-                        alertController.addAction(saveAction)
-                        alertController.addAction(cancelAction)
-                        
-                    self.present(alertController, animated: true, completion: nil)
+               
                     
                     UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
                 }
@@ -260,16 +241,9 @@ class CameraViewController: UIViewController {
         } catch {
             print(error.localizedDescription)
         }
-        
-//        switch cameraConfig.currentCameraPosition {
-//        case .some(.front):
-//            self.toggleCameraButton.setImage(#imageLiteral(resourceName: "camera_front"), for: .normal)
-//        case .some(.rear):
-//            self.toggleCameraButton.setImage(#imageLiteral(resourceName: "camera_rear"), for: .normal)
-//        default:
-//            return
-//        }
     }
+    
+    
     @IBAction func selectVideoMode(_ sender: Any) {
         Utilities.vibrate()
         self.cameraConfig.outputType = .video
@@ -282,7 +256,24 @@ class CameraViewController: UIViewController {
     }
     
     
+    func addNavigationBarButton(imageName:String,direction:direction){
+        var image = UIImage(named: imageName)
+        image = image?.withRenderingMode(.alwaysOriginal)
+        switch direction {
+        case .left:
+           self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: nil, action: #selector(goBack))
+        case .right:
+           self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: nil, action: #selector(goBack))
+        }
+    }
+
+    @objc func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
+
+   
     
+    //MARK: - CREATE DIRECTORY
     func createDir(dir: String) {
         let fullDirPath = docsDir + "/" + dir
         print(fullDirPath) //Remove later when uploading to Appstore
