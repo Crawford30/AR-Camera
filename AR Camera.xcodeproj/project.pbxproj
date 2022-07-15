@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA633D1A28814FFF00812927 /* MediaObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA633D1928814FFF00812927 /* MediaObjects.swift */; };
+		FA633D1C2881607B00812927 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA633D1B2881607B00812927 /* VideoCollectionViewCell.swift */; };
 		FA75E482286F205900F4854F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75E481286F205900F4854F /* CustomButton.swift */; };
 		FA75E484286F22E000F4854F /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75E483286F22E000F4854F /* CornerRadius.swift */; };
 		FA75E488286F6E1D00F4854F /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75E487286F6E1D00F4854F /* CameraViewController.xib */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA633D1928814FFF00812927 /* MediaObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaObjects.swift; sourceTree = "<group>"; };
+		FA633D1B2881607B00812927 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA75E481286F205900F4854F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		FA75E483286F22E000F4854F /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		FA75E487286F6E1D00F4854F /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 		FAAFAFAD286E1DD7002B2154 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA633D1928814FFF00812927 /* MediaObjects.swift */,
+				FA633D1B2881607B00812927 /* VideoCollectionViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -232,6 +238,7 @@
 			files = (
 				FAAFAF97286E107D002B2154 /* HomeViewController.swift in Sources */,
 				FADBB4892874B44500AC0D32 /* RecordingListViewController.swift in Sources */,
+				FA633D1C2881607B00812927 /* VideoCollectionViewCell.swift in Sources */,
 				FA75E484286F22E000F4854F /* CornerRadius.swift in Sources */,
 				FAAFAF93286E107D002B2154 /* AppDelegate.swift in Sources */,
 				FA75E482286F205900F4854F /* CustomButton.swift in Sources */,
@@ -241,6 +248,7 @@
 				FAAFAFB2286E1EA3002B2154 /* Utilities.swift in Sources */,
 				FAAFAFA8286E1D25002B2154 /* Extensions.swift in Sources */,
 				FA75E48E286F6FCB00F4854F /* CameraViewController.swift in Sources */,
+				FA633D1A28814FFF00812927 /* MediaObjects.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

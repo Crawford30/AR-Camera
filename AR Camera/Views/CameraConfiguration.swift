@@ -145,6 +145,7 @@ extension CameraConfiguration {
             self.videoOutput = AVCaptureMovieFileOutput()
             if captureSession.canAddOutput(self.videoOutput!) {
                 captureSession.addOutput(self.videoOutput!)
+               // print("SESSION OUTPUT: \(self.videoOutput!)")
             }
             
             
@@ -231,17 +232,51 @@ extension CameraConfiguration {
         self.photoCaptureCompletionBlock = completion
     }
     
-    func recordVideo(fileName: String?, completion: @escaping (URL?, Error?)-> Void) {
+    func recordVideo(completion: @escaping ( URL?, Error?)-> Void) {
         guard let captureSession = self.captureSession, captureSession.isRunning else {
             completion(nil, CameraControllerError.captureSessionIsMissing)
             return
         }
         
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let fileUrl = paths[0].appendingPathComponent("\(fileName).mp4")
-        try? FileManager.default.removeItem(at: fileUrl)
-        videoOutput!.startRecording(to: fileUrl, recordingDelegate: self)
-        self.videoRecordCompletionBlock = completion
+        let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
+    
+        let saveAction = UIAlertAction(title: "OK",
+                                       style: UIAlertAction.Style.default) { [self] (action: UIAlertAction) in
+
+            if let alertTextField = alertController.textFields?.first, alertTextField.text != nil {
+                               print("And the text is... \(alertTextField.text!)!")
+                               let formattedString = alertTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).safeDatabaseKey()
+                                              print("TAG: \(formattedString)")
+                               
+                               
+                               let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                               let fileUrl = paths[0].appendingPathComponent("\(formattedString).mp4")
+                               try? FileManager.default.removeItem(at: fileUrl)
+                               videoOutput!.startRecording(to: fileUrl, recordingDelegate: self)
+                               self.videoRecordCompletionBlock = completion
+                               
+                               
+                           }
+         }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
+                (action : UIAlertAction!) -> Void in })
+        alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "Enter Tag Here"
+            }
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+        
+        
+       // self.present(alertController,nil)
+        
+        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alertController, animated: true, completion: nil)
+        
+        
+      
+        
+       // print("COMPLETION BLOCK: \(self.videoRecordCompletionBlock)")
     }
     
     func stopRecording(completion: @escaping (Error?)->Void) {
@@ -250,6 +285,8 @@ extension CameraConfiguration {
             return
         }
         self.videoOutput?.stopRecording()
+        
+        
     }
 }
 
@@ -261,26 +298,32 @@ func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileUR
 
     } else {
         if let data = NSData(contentsOf: outputFileURL) {
-
-            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-            let documentDirectory = paths[0]
-            let docURL = URL(string: documentDirectory)!
-            let dataPath = docURL.appendingPathComponent("/DIRECTORY_NAME")
-
-            if !FileManager.default.fileExists(atPath: dataPath.absoluteString) {
-              do {
-                    try FileManager.default.createDirectory(atPath: dataPath.absoluteString, withIntermediateDirectories: true, attributes: nil)
-                  //  self.direc toryURL = dataPath
-                    print("Directory created successfully-\(dataPath.path)")
-                } catch let error as NSError{
-                    print("error creating directory -\(error.localizedDescription)");
-                }
-            }
-
-            let outputPath = "\(dataPath.path)/filename.mp4"
-            let success = data.write(toFile: outputPath, atomically: true)
-            // saving video into photos album.
-            UISaveVideoAtPathToSavedPhotosAlbum(outputPath, nil, nil, nil)
+            
+//            print("OUTPUT URL: \(outputFileURL)")
+//            
+//            print("OUTPUT URL DATA: \(data)")
+//
+//            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+//            let documentDirectory = paths[0]
+//            let docURL = URL(string: documentDirectory)!
+//            let dataPath = docURL.appendingPathComponent("/DIRECTORY_NAME")
+//
+//            if !FileManager.default.fileExists(atPath: dataPath.absoluteString) {
+//              do {
+//                    try FileManager.default.createDirectory(atPath: dataPath.absoluteString, withIntermediateDirectories: true, attributes: nil)
+//                  //  self.direc toryURL = dataPath
+//                    print("Directory created successfully-\(dataPath.path)")
+//                } catch let error as NSError{
+//                    print("error creating directory -\(error.localizedDescription)");
+//                }
+//            }
+//
+//            let outputPath = "\(dataPath.path)/filename.mp4"
+//            let success = data.write(toFile: outputPath, atomically: true)
+//            // saving video into photos album.
+//            
+//            print("OUTPUT PATH: \(outputPath)")
+//            UISaveVideoAtPathToSavedPhotosAlbum(outputPath, nil, nil, nil)
 
         }
     }

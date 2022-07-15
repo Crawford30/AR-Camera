@@ -161,7 +161,8 @@ class CameraViewController: UIViewController {
         }
     }
     
-    @objc func video(_ video: String, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+    @objc func video(_ name: String, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        print("VIDEO OUTPUT: \(name)")
         Utilities.vibrate()
         if let error = error {
             // we got back an error!
@@ -218,16 +219,20 @@ class CameraViewController: UIViewController {
                 }
             } else if !videoRecordingStarted {
                 videoRecordingStarted = true
-                self.cameraConfig.recordVideo(fileName: filename) { (url, error) in
+                self.cameraConfig.recordVideo { (url, error) in
                     guard let url = url else {
                         print(error ?? "Video recording error")
                         return
                     }
                     
                     print("URL: \(url)")
+                    
+                    //UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(name: "joel", didFinishSavingWithError: contextInfo: )), nil)
                
                     
-                    UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
+                    //UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                    
+                    //UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
                 }
             }
         }
