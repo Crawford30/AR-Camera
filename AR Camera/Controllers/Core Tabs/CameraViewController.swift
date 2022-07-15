@@ -10,6 +10,8 @@ import Photos
 
 class CameraViewController: UIViewController {
     
+    private var mediaObjectsArray = [MediaObject]()
+    
     enum direction {
         case right
         case left
@@ -27,6 +29,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var galleryButton: UIButton!
     @IBOutlet weak var cameraSelectionButton: UIButton!
     @IBOutlet weak var videoCameraButton: UIButton!
+    @IBOutlet weak var listVideoButton: UIButton!
     @IBOutlet weak var toggleFlashButton: UIButton!
     
     var cameraConfig: CameraConfiguration!
@@ -143,6 +146,26 @@ class CameraViewController: UIViewController {
         }
     }
     
+    
+    
+    @IBAction func gotToListVideo(_ sender: Any) {
+        Utilities.vibrate()
+        
+        let controller = RecordingListViewController()
+        let navController = UINavigationController(rootViewController: controller)
+        
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        guard let window = view.window else { return }
+        window.layer.add(transition, forKey: kCATransition)
+        navController.modalPresentationStyle = .fullScreen
+        self.present(navController, animated: false, completion: nil)
+        
+    }
+    
+    
     @objc fileprivate func showToastForSaved() {
         showToast(message: "Saved!", fontSize: 12.0)
     }
@@ -197,7 +220,7 @@ class CameraViewController: UIViewController {
             
             showToast(message: "Saved", fontSize: 12.0)
         }
-        print("VIDEO LOCATION: \(video)")
+        print("VIDEO LOCATION: \(name)")
     }
     
     @IBAction func didTapOnTakePhotoButton(_ sender: Any) {
@@ -225,7 +248,29 @@ class CameraViewController: UIViewController {
                         return
                     }
                     
+                    let sharedInstance  = MediaObjectSingleton.shared
+                    //let mediaOb = MediaObject.init(videoURL: <#T##URL#>, caption: <#T##String#>, id: <#T##String#>, createDate: <#T##Date#>, endDate: <#T##Date#>)
+                    
+                    let mediaObject = MediaObject.init(videoURL: url, caption: sharedInstance.getUserTag(), id: UUID().uuidString, createDate: sharedInstance.getCreatedAtDate(), endDate: Date())
+
+                    self.mediaObjectsArray.append(mediaObject)
+                    
+                    UserDefaults.standard.mediaObjects = self.mediaObjectsArray
+                    
+                    
+                    
                     print("URL: \(url)")
+                    
+                    print("SINGLE MEDIA OBJECT: \(mediaObject)")
+                    
+                    print("SINGLE MEDIA OBJECT VIDEO URL: \(mediaObject.videoURL)")
+                    print("SINGLE MEDIA OBJECT START DATE: \(mediaObject.createDate)")
+                    
+                    print("SINGLE MEDIA OBJECT END DATE: \(mediaObject.endDate)")
+                    
+                    
+                    print("MEDIA ARRAY: \(self.mediaObjectsArray)")
+                    //let mediaObject = MediaObject(imageData: nil, videoURL: url, caption: name, endDate: <#T##Date?#>)
                     
                     //UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(name: "joel", didFinishSavingWithError: contextInfo: )), nil)
                
@@ -294,6 +339,15 @@ class CameraViewController: UIViewController {
             }
         }
     }
+    
+    
+    
+//    static func saveData (mediaObject: [MediaObject]) throws
+//    {
+//         let encoded = try JSONEncoder().encode(mediaObject)
+//         try encoded.write(to: ArchiveURL)
+//         print("Books saved")
+//    }
     
 }
 

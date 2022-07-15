@@ -10,6 +10,13 @@ import UIKit
 
 class VideoCollectionViewCell: UICollectionViewCell {
     
+    public func configureCell(for mediaObject: MediaObject){
+        if let imageData = mediaObject.imageData{
+            //converts a data object to a UIImage
+            myImageView.image = UIImage(data: imageData)
+        }
+    }
+    
     static let identifier = "VideoCollectionViewCell"
     
     private let myImageView : UIImageView = {
@@ -21,9 +28,23 @@ class VideoCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let dateLabel : UILabel = {
+    public let dateLabel : UILabel = {
         let label = UILabel()
         label.text = "Custom"
+        label.textColor = .white
+        label.numberOfLines = .zero
+        label.font = UIFont.boldSystemFont(ofSize: 10.0)
+        label.backgroundColor = .green
+        return label
+    }()
+    
+    
+    public let tagLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Tag"
+        label.textColor = .white
+        label.numberOfLines = .zero
+        label.font = UIFont.boldSystemFont(ofSize: 10.0)
         label.backgroundColor = .green
         return label
     }()
@@ -34,6 +55,10 @@ class VideoCollectionViewCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         contentView.addSubview(myImageView)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(tagLabel)
+        
+        
+       
        
     }
     
@@ -45,18 +70,26 @@ class VideoCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        dateLabel.frame = CGRect(
+        
+        tagLabel.frame = CGRect(
             x: 5,
-            y: contentView.frame.size.height-50,
+            y: contentView.frame.size.height-20,
             width: contentView.frame.size.width-10,
             height: 50
+        )
+        
+        dateLabel.frame = CGRect(
+            x: 5,
+            y: tagLabel.frame.size.height-50,
+            width: contentView.frame.size.width-10,
+            height: 30
         )
         
         myImageView.frame = CGRect(
             x: 5,
             y: 0,
-            width: contentView.frame.size.width-10,
-            height: contentView.frame.size.height-50
+            width: contentView.frame.size.width,
+            height: 100
         )
     }
     

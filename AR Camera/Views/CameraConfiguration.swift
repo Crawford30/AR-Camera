@@ -11,6 +11,8 @@ import UIKit
 
 class CameraConfiguration: NSObject {
     
+
+    
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
         case captureSessionIsMissing
@@ -238,6 +240,8 @@ extension CameraConfiguration {
             return
         }
         
+        let sharedInstance = MediaObjectSingleton.shared
+        
         let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
     
         let saveAction = UIAlertAction(title: "OK",
@@ -247,11 +251,16 @@ extension CameraConfiguration {
                                print("And the text is... \(alertTextField.text!)!")
                                let formattedString = alertTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).safeDatabaseKey()
                                               print("TAG: \(formattedString)")
+                
+                sharedInstance.setUserTag(theTag: formattedString)
+                sharedInstance.setCreatedAtDate(theDate: Date())
                                
                                
                                let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
                                let fileUrl = paths[0].appendingPathComponent("\(formattedString).mp4")
                                try? FileManager.default.removeItem(at: fileUrl)
+//                print("FILE NAME: \(formattedString)")
+//                print("FILE NAME URL: \(formattedString)")
                                videoOutput!.startRecording(to: fileUrl, recordingDelegate: self)
                                self.videoRecordCompletionBlock = completion
                                
@@ -286,6 +295,7 @@ extension CameraConfiguration {
         }
         self.videoOutput?.stopRecording()
         
+      
         
     }
 }

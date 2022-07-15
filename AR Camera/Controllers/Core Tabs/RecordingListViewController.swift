@@ -9,11 +9,14 @@ import UIKit
 
 class RecordingListViewController: UIViewController {
     
+    //UserDefaults.standard.domainSchemas
+    
     let myVertCVSpacing:  CGFloat = CGFloat( 8.0 )
     private var listVdeosCollectionView: UICollectionView?
     
-    private var mediaObjects = [MediaObject](){
+    private var mediaObjects =  UserDefaults.standard.mediaObjects {
         didSet { //property observer for changes
+            print("TOTAL ARRAY COUNT: \(mediaObjects.count)")
             listVdeosCollectionView?.reloadData()
         }
     }
@@ -95,17 +98,17 @@ class RecordingListViewController: UIViewController {
 
     @objc   func didTapTakeVideoButton(sender: AnyObject){
         Utilities.vibrate()
-//    let controller = HomeViewController()
-//    let navController = UINavigationController(rootViewController: controller)
-//
-//    let transition = CATransition()
-//    transition.duration = 0.3
-//    transition.type = CATransitionType.push
-//    transition.subtype = CATransitionSubtype.fromLeft
-//    guard let window = view.window else { return }
-//    window.layer.add(transition, forKey: kCATransition)
-//    navController.modalPresentationStyle = .fullScreen
-//    self.present(navController, animated: false, completion: nil)
+    let controller = HomeViewController()
+    let navController = UINavigationController(rootViewController: controller)
+
+    let transition = CATransition()
+    transition.duration = 0.3
+    transition.type = CATransitionType.push
+    transition.subtype = CATransitionSubtype.fromLeft
+    guard let window = view.window else { return }
+    window.layer.add(transition, forKey: kCATransition)
+    navController.modalPresentationStyle = .fullScreen
+    self.present(navController, animated: false, completion: nil)
        
     }
     
@@ -154,14 +157,24 @@ class RecordingListViewController: UIViewController {
 extension RecordingListViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
-        
-        //mediaObjects.count
+        return mediaObjects.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell  = listVdeosCollectionView?.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath)
+        let cell  = listVdeosCollectionView?.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as? VideoCollectionViewCell
+        
+        let mediaObject = mediaObjects[indexPath.row]
+        let createdDateString = DateFormatter.sharedDateFormatter.string(from: mediaObject.createDate!)
+        
+        cell!.dateLabel.text = createdDateString
+        
+        cell!.tagLabel.text = mediaObject.caption
+        
+        //dateFormatter.string(from: mediaObject.createDate!)
+        
+        //cell?.configureCell(for: mediaObject)
+        
         return cell!
     }
     

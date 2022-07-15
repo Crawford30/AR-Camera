@@ -13,6 +13,7 @@
                 <outlet property="cameraButton" destination="2sp-4I-PQh" id="1Hp-zj-fCU"/>
                 <outlet property="cameraSelectionButton" destination="BRx-A2-9Rh" id="Oxx-Nv-soa"/>
                 <outlet property="galleryButton" destination="b00-iJ-L3I" id="Jkg-fz-sjd"/>
+                <outlet property="listVideoButton" destination="4uU-QP-sjc" id="0gE-H2-11X"/>
                 <outlet property="previewImageView" destination="nzD-PH-VeJ" id="pFf-XF-ufv"/>
                 <outlet property="toggleCameraButton" destination="5hP-Ur-4VR" id="JeR-9f-7fx"/>
                 <outlet property="toggleFlashButton" destination="CNV-5q-B7d" id="nyx-xT-iQz"/>
@@ -79,13 +80,24 @@
                         <action selector="gotoGallery:" destination="-1" eventType="touchUpInside" id="Th0-9A-pqn"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uU-QP-sjc">
+                    <rect key="frame" x="16" y="389" width="44" height="44"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="list.dash" catalog="system"/>
+                    <connections>
+                        <action selector="gotToListVideo:" destination="-1" eventType="touchUpInside" id="OVe-8R-VoG"/>
+                        <action selector="gotToListVideo:" destination="-2" eventType="touchUpInside" id="puT-so-g2U"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="BRx-A2-9Rh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="12c-4C-yMs"/>
                 <constraint firstItem="BRx-A2-9Rh" firstAttribute="top" secondItem="UtF-Rv-1bV" secondAttribute="bottom" constant="10" id="4Ok-dC-Ao0"/>
+                <constraint firstItem="UtF-Rv-1bV" firstAttribute="top" secondItem="4uU-QP-sjc" secondAttribute="bottom" constant="-3" id="5WO-z0-mwz"/>
                 <constraint firstItem="UtF-Rv-1bV" firstAttribute="leading" secondItem="BRx-A2-9Rh" secondAttribute="leading" id="6EG-gR-ReH"/>
+                <constraint firstItem="4uU-QP-sjc" firstAttribute="width" secondItem="UtF-Rv-1bV" secondAttribute="width" id="6wD-ut-KfK"/>
                 <constraint firstItem="nzD-PH-VeJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7xC-jp-wvH"/>
                 <constraint firstItem="nzD-PH-VeJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8Yd-xW-xcn"/>
                 <constraint firstItem="nzD-PH-VeJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="EcX-ln-94c"/>
@@ -94,6 +106,7 @@
                 <constraint firstItem="5hP-Ur-4VR" firstAttribute="top" secondItem="CNV-5q-B7d" secondAttribute="bottom" constant="10" id="KXO-km-Gsk"/>
                 <constraint firstItem="nzD-PH-VeJ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Kon-Ul-Yh5"/>
                 <constraint firstItem="BRx-A2-9Rh" firstAttribute="bottom" secondItem="2sp-4I-PQh" secondAttribute="bottom" id="NET-aV-JGj"/>
+                <constraint firstItem="4uU-QP-sjc" firstAttribute="height" secondItem="UtF-Rv-1bV" secondAttribute="height" id="NNy-9f-wCl"/>
                 <constraint firstItem="2sp-4I-PQh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RmB-PB-SGr"/>
                 <constraint firstItem="BRx-A2-9Rh" firstAttribute="height" secondItem="5hP-Ur-4VR" secondAttribute="height" id="TIw-nd-5Uf"/>
                 <constraint firstItem="b00-iJ-L3I" firstAttribute="height" secondItem="BRx-A2-9Rh" secondAttribute="height" id="Tnf-2O-OSm"/>
@@ -102,6 +115,7 @@
                 <constraint firstItem="b00-iJ-L3I" firstAttribute="bottom" secondItem="BRx-A2-9Rh" secondAttribute="bottom" id="Ytj-Kz-qZY"/>
                 <constraint firstItem="5hP-Ur-4VR" firstAttribute="trailing" secondItem="CNV-5q-B7d" secondAttribute="trailing" id="avo-Ap-8vG"/>
                 <constraint firstItem="CNV-5q-B7d" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="b1i-cg-F7G"/>
+                <constraint firstItem="4uU-QP-sjc" firstAttribute="trailing" secondItem="UtF-Rv-1bV" secondAttribute="trailing" id="fF9-Af-3Et"/>
                 <constraint firstItem="b00-iJ-L3I" firstAttribute="width" secondItem="BRx-A2-9Rh" secondAttribute="width" id="i8P-wW-EX9"/>
                 <constraint firstAttribute="bottom" secondItem="2sp-4I-PQh" secondAttribute="bottom" constant="40" id="lqq-Gf-RFI"/>
                 <constraint firstItem="UtF-Rv-1bV" firstAttribute="width" secondItem="BRx-A2-9Rh" secondAttribute="width" id="mWN-fH-w00"/>
@@ -115,6 +129,7 @@
     <resources>
         <image name="camera" width="48" height="48"/>
         <image name="flash_off" width="48" height="48"/>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="photo_icon" width="48" height="48"/>
         <image name="switch_camera" width="48" height="48"/>
         <image name="videocam" width="48" height="48"/>

@@ -129,3 +129,28 @@ extension UIColor {
 }
 
 
+
+
+extension UserDefaults {
+    var mediaObjects: [MediaObject] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "mediaObjects") else { return [] }
+            return (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)) as? [MediaObject] ?? []
+        }
+        set {
+            UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false), forKey: "mediaObjects")
+        }
+    }
+}
+
+
+
+extension DateFormatter {
+
+    static var sharedDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        // Add your formatter configuration here
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter
+    }()
+}
