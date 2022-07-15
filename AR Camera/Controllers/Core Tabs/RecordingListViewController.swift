@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 
 class RecordingListViewController: UIViewController {
     
@@ -28,6 +30,8 @@ class RecordingListViewController: UIViewController {
         
         self.view.backgroundColor = .blue
         configureCollectionView()
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -122,7 +126,7 @@ class RecordingListViewController: UIViewController {
         layout.minimumInteritemSpacing = myVertCVSpacing
         layout.itemSize = myCellSize
         
-//        layout.itemSize = CGSize(width: view.frame.size.width, height: view.frame.size.height )
+        //layout.itemSize = CGSize(width: view.frame.size.width, height: view.frame.size.height )
         listVdeosCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         
@@ -138,6 +142,8 @@ class RecordingListViewController: UIViewController {
 
         view.addSubview(listVdeosCollectionView)
         listVdeosCollectionView.frame = view.bounds
+        
+        listVdeosCollectionView.reloadData()
     }
     
     
@@ -171,9 +177,7 @@ extension RecordingListViewController: UICollectionViewDataSource{
         
         cell!.tagLabel.text = mediaObject.caption
         
-        //dateFormatter.string(from: mediaObject.createDate!)
-        
-        //cell?.configureCell(for: mediaObject)
+      
         
         return cell!
     }

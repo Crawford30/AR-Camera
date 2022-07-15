@@ -23,6 +23,7 @@ class MediaObject: NSObject, NSCoding {
         self.createDate = createDate
         self.endDate = endDate
     }
+    
     required init(coder decoder: NSCoder) {
        //self.imageData = decoder.decodeObject(forKey: "imageData") as? Data ?? NSData() as Data
         self.videoURL = decoder.decodeObject(forKey: "videoURL") as? URL ?? NSURL() as URL
@@ -30,9 +31,8 @@ class MediaObject: NSObject, NSCoding {
         self.id = decoder.decodeObject(forKey: "id") as? String ?? ""
         self.createDate = decoder.decodeObject(forKey: "createDate") as? Date ?? Date()
         self.endDate = decoder.decodeObject(forKey: "endDate") as? Date ?? Date()
-        
-        
     }
+    
     func encode(with coder: NSCoder) {
         //coder.encode(imageData, forKey: "imageData")
         coder.encode(videoURL, forKey: "videoURL")
