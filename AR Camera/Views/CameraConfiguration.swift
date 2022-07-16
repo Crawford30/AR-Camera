@@ -10,9 +10,7 @@ import AVFoundation
 import UIKit
 
 class CameraConfiguration: NSObject {
-    
-
-    
+    var fileURL: URL?
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
         case captureSessionIsMissing
@@ -241,6 +239,7 @@ extension CameraConfiguration {
         }
         
         let sharedInstance = MediaObjectSingleton.shared
+       
         
         let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
     
@@ -254,14 +253,19 @@ extension CameraConfiguration {
                 
                 sharedInstance.setUserTag(theTag: formattedString)
                 sharedInstance.setCreatedAtDate(theDate: Date())
-                               
-                               
-                               let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-                               let fileUrl = paths[0].appendingPathComponent("\(formattedString).mp4")
-                               try? FileManager.default.removeItem(at: fileUrl)
+                
+                
+                let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                if (formattedString.isEmpty){
+                    fileURL = paths[0].appendingPathComponent("video.mp4")
+                }else {
+                    fileURL = paths[0].appendingPathComponent("\(formattedString).mp4")
+                }
+                             
+                try? FileManager.default.removeItem(at: self.fileURL!)
 //                print("FILE NAME: \(formattedString)")
 //                print("FILE NAME URL: \(formattedString)")
-                               videoOutput!.startRecording(to: fileUrl, recordingDelegate: self)
+                videoOutput!.startRecording(to: fileURL!, recordingDelegate: self)
                                self.videoRecordCompletionBlock = completion
                                
                                

@@ -141,7 +141,20 @@ extension RecordingListViewController: UICollectionViewDataSource{
         let mediaObject = mediaObjects[indexPath.row]
         let createdDateString = DateFormatter.sharedDateFormatter.string(from: mediaObject.createDate!)
         
-        cell!.dateLabel.text = createdDateString
+        
+         let interval = mediaObject.endDate! - mediaObject.createDate!
+        
+        if let second = interval.second {
+            cell!.dateLabel.text = "\(second) Seconds"
+        }
+        
+        
+        
+        //mediaObject.endDate!.timeIntervalSince(mediaObject.createDate!)
+        
+        
+        
+        //createdDateString
         
         cell!.tagLabel.text = mediaObject.caption
         
