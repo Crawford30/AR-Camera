@@ -145,6 +145,12 @@ extension RecordingListViewController: UICollectionViewDataSource{
         
         cell!.tagLabel.text = mediaObject.caption
         
+        
+        if let videoURL = mediaObject.videoURL {
+            let image = videoURL.videoPreviewThumbnail() ?? UIImage(systemName: "heart")
+            cell!.myImageView.image = image
+        }
+        
       
     
         return cell!
@@ -153,7 +159,14 @@ extension RecordingListViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Utilities.vibrate()
+        
         print("Cell: \(indexPath.item) tapped")
+        let mediaObject = mediaObjects[indexPath.row]
+        let playerViewController = AVPlayerViewController()
+        let player  = AVPlayer(url: mediaObject.videoURL!)
+        playerViewController.player = player
+        present(playerViewController, animated: true, completion: nil)
+        player.play()
     }
 
     

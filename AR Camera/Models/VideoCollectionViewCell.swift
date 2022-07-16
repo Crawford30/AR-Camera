@@ -15,11 +15,17 @@ class VideoCollectionViewCell: UICollectionViewCell {
             //converts a data object to a UIImage
             myImageView.image = UIImage(data: imageData)
         }
+        
+        //Create Video Preview
+//        if let videoURL = mediaObject.videoURL {
+//            let image = videoURL.videoPreviewThumbnail() ?? UIImage(systemName: "heart")
+//            myImageView.image = image
+//        }
     }
     
     static let identifier = "VideoCollectionViewCell"
     
-    private let myImageView : UIImageView = {
+    public let myImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.backgroundColor = .yellow
