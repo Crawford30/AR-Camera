@@ -80,6 +80,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		FA96EA3F2882CE38004FB338 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA633D1B2881607B00812927 /* VideoCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		FA96EA402882CE77004FB338 /* OtherViews */ = {
+			isa = PBXGroup;
+			children = (
+				FA75E48F28704A3B00F4854F /* PopUpWindow.swift */,
+				FA75E489286F6F1300F4854F /* CameraConfiguration.swift */,
+				FA75E481286F205900F4854F /* CustomButton.swift */,
+			);
+			path = OtherViews;
+			sourceTree = "<group>";
+		};
 		FAAFAF86286E107C002B2154 = {
 			isa = PBXGroup;
 			children = (
@@ -151,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				FA633D1928814FFF00812927 /* MediaObjects.swift */,
-				FA633D1B2881607B00812927 /* VideoCollectionViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -159,11 +176,10 @@
 		FAAFAFAE286E1DED002B2154 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA96EA402882CE77004FB338 /* OtherViews */,
+				FA96EA3F2882CE38004FB338 /* CollectionViewCell */,
 				FAAFAF9B286E107E002B2154 /* Assets.xcassets */,
 				FAAFAFAF286E1DF5002B2154 /* Storyboards */,
-				FA75E481286F205900F4854F /* CustomButton.swift */,
-				FA75E489286F6F1300F4854F /* CameraConfiguration.swift */,
-				FA75E48F28704A3B00F4854F /* PopUpWindow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

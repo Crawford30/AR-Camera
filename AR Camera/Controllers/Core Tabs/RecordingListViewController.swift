@@ -139,7 +139,7 @@ extension RecordingListViewController: UICollectionViewDataSource{
         let cell  = listVdeosCollectionView?.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as? VideoCollectionViewCell
         
         let mediaObject = mediaObjects[indexPath.row]
-        let createdDateString = DateFormatter.sharedDateFormatter.string(from: mediaObject.createDate!)
+        //let createdDateString = DateFormatter.sharedDateFormatter.string(from: mediaObject.createDate!)
         
         
          let interval = mediaObject.endDate! - mediaObject.createDate!
