@@ -72,24 +72,24 @@ class VideoCollectionViewCell: UICollectionViewCell {
         
         
         tagLabel.frame = CGRect(
-            x: 5,
-            y: contentView.frame.size.height-20,
-            width: contentView.frame.size.width-10,
-            height: 50
+            x: 0,
+            y: contentView.frame.size.height-40,
+            width: contentView.frame.size.width,
+            height: 40
         )
         
         dateLabel.frame = CGRect(
-            x: 5,
-            y: tagLabel.frame.size.height-50,
-            width: contentView.frame.size.width-10,
-            height: 30
+            x: 0,
+            y: contentView.frame.size.height-90,
+            width: contentView.frame.size.width,
+            height: 40
         )
         
         myImageView.frame = CGRect(
-            x: 5,
+            x: 0,
             y: 0,
             width: contentView.frame.size.width,
-            height: 100
+            height: 200
         )
     }
     
