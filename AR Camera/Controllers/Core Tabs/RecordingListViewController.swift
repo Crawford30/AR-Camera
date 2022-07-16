@@ -146,16 +146,18 @@ extension RecordingListViewController: UICollectionViewDataSource{
         
         if let second = interval.second {
             if(second <= 1 ){
-                cell!.dateLabel.text = "\(second) Second"
+                cell!.dateLabel.text = " Video Duration: \(second) Second"
             }else {
-                cell!.dateLabel.text = "\(second) Seconds"
+                cell!.dateLabel.text = " Video Duration: \(second) Seconds"
             }
             
         }
         
-    
-        cell!.tagLabel.text = mediaObject.caption
         
+        if let tag = mediaObject.caption {
+            cell!.tagLabel.text = " Tag: \(tag)"
+        }
+            
         
         if let videoURL = mediaObject.videoURL {
             let image = videoURL.videoPreviewThumbnail() ?? UIImage(systemName: "heart")
