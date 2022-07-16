@@ -10,9 +10,6 @@ import AVFoundation
 import AVKit
 
 class RecordingListViewController: UIViewController {
-    
-    //UserDefaults.standard.domainSchemas
-    
     let myVertCVSpacing:  CGFloat = CGFloat( 8.0 )
     private var listVdeosCollectionView: UICollectionView?
     
@@ -25,24 +22,16 @@ class RecordingListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setNavItem()
-        
         self.view.backgroundColor = .blue
         configureCollectionView()
-        
-        
-
-        // Do any additional setup after loading the view.
     }
     
     
     
     //MARK: - Nav Item
       private func setNavItem(){
-          
           self.navigationItem.leftItemsSupplementBackButton = true
-          
         navigationItem.title = "Recording List"
           let videoImage   = UIImage(systemName: "video.fill")!
           let listVideos = UIImage(systemName: "list.dash")!
@@ -50,8 +39,6 @@ class RecordingListViewController: UIViewController {
           let videoButton = UIBarButtonItem(image: videoImage,  style: .plain, target: self, action: #selector(didTapTakeVideoButton))
           let listVideoButton = UIBarButtonItem(image: listVideos,  style: .plain, target: self, action: #selector(didTapListViedeosButton))
           navigationItem.rightBarButtonItems = [listVideoButton,videoButton]
-          
-          
           navigationItem.hidesBackButton = true
              navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButton, style: .done,target: self, action: #selector(backButtonTapped))
           
@@ -66,18 +53,11 @@ class RecordingListViewController: UIViewController {
 //          self.navigationItem.leftBarButtonItem = userPhone
           
           
-          
-          
-         
-          
     }
     
     
     @objc func backButtonTapped(){
-      //navigationController?.popToRootViewController(animated: true)
-        
         Utilities.vibrate()
-        
     let controller = HomeViewController()
     let navController = UINavigationController(rootViewController: controller)
     
@@ -129,17 +109,12 @@ class RecordingListViewController: UIViewController {
         //layout.itemSize = CGSize(width: view.frame.size.width, height: view.frame.size.height )
         listVdeosCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        
         guard let listVdeosCollectionView = listVdeosCollectionView else {
             return
         }
         listVdeosCollectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: VideoCollectionViewCell.identifier)
         listVdeosCollectionView.dataSource = self
         listVdeosCollectionView.delegate = self
-        
-        
-        
-
         view.addSubview(listVdeosCollectionView)
         listVdeosCollectionView.frame = view.bounds
         
@@ -147,13 +122,6 @@ class RecordingListViewController: UIViewController {
     }
     
     
-    
-
-    
-    
-    
-
-   
 
 }
 
@@ -178,7 +146,7 @@ extension RecordingListViewController: UICollectionViewDataSource{
         cell!.tagLabel.text = mediaObject.caption
         
       
-        
+    
         return cell!
     }
     

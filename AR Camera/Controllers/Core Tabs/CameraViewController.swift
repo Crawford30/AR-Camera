@@ -249,8 +249,6 @@ class CameraViewController: UIViewController {
                     }
                     
                     let sharedInstance  = MediaObjectSingleton.shared
-                    //let mediaOb = MediaObject.init(videoURL: <#T##URL#>, caption: <#T##String#>, id: <#T##String#>, createDate: <#T##Date#>, endDate: <#T##Date#>)
-                    
                     let mediaObject = MediaObject.init(videoURL: url, caption: sharedInstance.getUserTag(), id: UUID().uuidString, createDate: sharedInstance.getCreatedAtDate(), endDate: Date())
 
                     self.mediaObjectsArray.append(mediaObject)
@@ -340,14 +338,6 @@ class CameraViewController: UIViewController {
         }
     }
     
-    
-    
-//    static func saveData (mediaObject: [MediaObject]) throws
-//    {
-//         let encoded = try JSONEncoder().encode(mediaObject)
-//         try encoded.write(to: ArchiveURL)
-//         print("Books saved")
-//    }
     
 }
 
