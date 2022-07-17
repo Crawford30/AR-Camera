@@ -10,7 +10,14 @@ import Photos
 
 class CameraViewController: UIViewController {
     
-    private var mediaObjectsArray = [MediaObject]()
+    
+    
+    let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
+    
+    //private var mediaObjectsArray = [MediaObject]()
+    
+    
+    var mediaObjectsArray:    [ MediaObject ] = []
     
     enum direction {
         case right
@@ -20,7 +27,7 @@ class CameraViewController: UIViewController {
     let docsDir: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! //documnet directory
     var popUpWindow:PopupWindow!
     var filename: String =  ""
-
+    
     
     @IBOutlet weak var cameraButton: CustomButton!
     @IBOutlet weak var previewImageView: UIImageView!
@@ -45,6 +52,8 @@ class CameraViewController: UIViewController {
         }
     }
     
+    
+    
     func checkPermission(completion: @escaping ()->Void) {
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
         switch photoAuthorizationStatus {
@@ -62,7 +71,7 @@ class CameraViewController: UIViewController {
                 }
             })
             print("It is not determined until now")
-        case .restricted:
+        case .restricted, .denied:
             // same same
             print("User do not have access to photo album.")
         case .denied:
@@ -93,10 +102,10 @@ class CameraViewController: UIViewController {
         Utilities.vibrate()
         checkPermission(completion: {
             DispatchQueue.main.async {
-            self.imagePickerController.sourceType = .photoLibrary
-            self.imagePickerController.delegate = self
-            self.imagePickerController.mediaTypes = ["public.image", "public.movie"]
-            self.present(self.imagePickerController, animated: true, completion: nil)
+                self.imagePickerController.sourceType = .photoLibrary
+                self.imagePickerController.delegate = self
+                self.imagePickerController.mediaTypes = ["public.image", "public.movie"]
+                self.present(self.imagePickerController, animated: true, completion: nil)
             }
         })
     }
@@ -107,7 +116,7 @@ class CameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         self.cameraConfig = CameraConfiguration()
         cameraConfig.setup { (error) in
             if error != nil {
@@ -130,7 +139,7 @@ class CameraViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-
+    
     //MARK: - TOGGLE FLASH
     @IBAction func toggleFlash(_ sender: Any) {
         Utilities.vibrate()
@@ -194,31 +203,6 @@ class CameraViewController: UIViewController {
         } else {
             
             
-            let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
-        
-            let saveAction = UIAlertAction(title: "OK",
-                                   style: UIAlertAction.Style.default) { (action: UIAlertAction) in
-
-                               if let alertTextField = alertController.textFields?.first, alertTextField.text != nil {
-                                   print("And the text is... \(alertTextField.text!)!")
-                                   let formattedString = alertTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).safeDatabaseKey()
-                                                  print("TAG: \(formattedString)")
-                                   
-                                   self.filename = formattedString
-                               }
-             }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
-                    (action : UIAlertAction!) -> Void in })
-            alertController.addTextField { (textField : UITextField!) -> Void in
-                    textField.placeholder = "Enter Tag Here"
-                }
-                alertController.addAction(saveAction)
-                alertController.addAction(cancelAction)
-                
-            self.present(alertController, animated: true, completion: nil)
-            
-            showToast(message: "Saved", fontSize: 12.0)
         }
         print("VIDEO LOCATION: \(name)")
     }
@@ -242,41 +226,46 @@ class CameraViewController: UIViewController {
                 }
             } else if !videoRecordingStarted {
                 videoRecordingStarted = true
-                self.cameraConfig.recordVideo { (url, error) in
-                    guard let url = url else {
-                        print(error ?? "Video recording error")
-                        return
+                
+                var tempID = MediaObject.init(videoURL: NSURL(fileURLWithPath: "") as URL, caption: "", id: "", createDate: Date(), endDate: Date())
+                
+                
+                // tempID = serviceID.init(serviceID: 0, categoryID: 0, serviceTitle: "", serviceImage: "", serviceImageLink: "")
+                
+                let saveAction = UIAlertAction(title: "OK",
+                                               style: UIAlertAction.Style.default) { (action: UIAlertAction) in
+                    if let alertTextField = self.alertController.textFields?.first, alertTextField.text != nil {
+                        print("And the text is... \(alertTextField.text!)!")
+                        let tag =  "\(alertTextField.text!)"
+                        
+                        self.cameraConfig.recordVideo(fileName: tag) { (url, error) in
+                            guard let url = url else {
+                                print(error ?? "Video recording error")
+                                return
+                            }
+                            
+                            let sharedInstance  = MediaObjectSingleton.shared
+                            let mediaObject = MediaObject.init(videoURL: url, caption: sharedInstance.getUserTag(), id: UUID().uuidString, createDate: sharedInstance.getCreatedAtDate(), endDate: Date())
+                            self.mediaObjectsArray.append(mediaObject)
+                            print("URL: \(mediaObject.videoURL)")
+                            UserDefaults.standard.mediaObjects = self.mediaObjectsArray
+                            
+                        }
                     }
                     
-                    let sharedInstance  = MediaObjectSingleton.shared
-                    let mediaObject = MediaObject.init(videoURL: url, caption: sharedInstance.getUserTag(), id: UUID().uuidString, createDate: sharedInstance.getCreatedAtDate(), endDate: Date())
-
-                    self.mediaObjectsArray.append(mediaObject)
                     
-                    UserDefaults.standard.mediaObjects = self.mediaObjectsArray
-                    
-                    
-                    
-                    print("URL: \(url)")
-                    
-                    print("SINGLE MEDIA OBJECT: \(mediaObject)")
-                    
-                    print("SINGLE MEDIA OBJECT VIDEO URL: \(mediaObject.videoURL)")
-                    print("SINGLE MEDIA OBJECT START DATE: \(mediaObject.createDate)")
-                    
-                    print("SINGLE MEDIA OBJECT END DATE: \(mediaObject.endDate)")
-                    
-                    
-                    print("MEDIA ARRAY: \(self.mediaObjectsArray)")
-                    //let mediaObject = MediaObject(imageData: nil, videoURL: url, caption: name, endDate: <#T##Date?#>)
-                    
-                    //UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(name: "joel", didFinishSavingWithError: contextInfo: )), nil)
-               
-                    
-                    //UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
-                    
-                    //UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
                 }
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
+                    (action : UIAlertAction!) -> Void in })
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                    textField.placeholder = "Enter Tag Here"
+                }
+                alertController.addAction(saveAction)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+                
             }
         }
     }
@@ -309,17 +298,17 @@ class CameraViewController: UIViewController {
         image = image?.withRenderingMode(.alwaysOriginal)
         switch direction {
         case .left:
-           self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: nil, action: #selector(goBack))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: nil, action: #selector(goBack))
         case .right:
-           self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: nil, action: #selector(goBack))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: nil, action: #selector(goBack))
         }
     }
-
+    
     @objc func goBack() {
         navigationController?.popViewController(animated: true)
     }
-
-   
+    
+    
     
     //MARK: - CREATE DIRECTORY
     func createDir(dir: String) {

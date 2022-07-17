@@ -30,7 +30,6 @@ extension URL{
             let cgImage = try assetGenerator.copyCGImage(at: timeStamp, actualTime: nil) //lower level api don't know about UIKit, AVKit
             image = UIImage(cgImage: cgImage)
         } catch {
-            
             print("Failed to generate Image: \(error)")
         }
         return image

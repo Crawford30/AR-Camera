@@ -11,6 +11,7 @@ import UIKit
 
 class CameraConfiguration: NSObject {
     var fileURL: URL?
+    
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
         case captureSessionIsMissing
@@ -48,9 +49,6 @@ class CameraConfiguration: NSObject {
     var audioInput: AVCaptureDeviceInput?
     var outputType: OutputType?
     
-   
-    
-    
 }
 
 extension CameraConfiguration {
@@ -63,9 +61,8 @@ extension CameraConfiguration {
         
         func configureCaptureDevices() throws {
             let session = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.unspecified)
-            
             let cameras = (session.devices.compactMap{$0})
-
+            
             for camera in cameras {
                 if camera.position == .front {
                     self.frontCamera = camera
@@ -97,7 +94,7 @@ extension CameraConfiguration {
                     throw CameraControllerError.inputsAreInvalid
                 }
             }
-                
+            
             else if let frontCamera = self.frontCamera {
                 self.frontCameraInput = try AVCaptureDeviceInput(device: frontCamera)
                 if captureSession.canAddInput(self.frontCameraInput!) {
@@ -107,7 +104,7 @@ extension CameraConfiguration {
                     throw CameraControllerError.inputsAreInvalid
                 }
             }
-                
+            
             else {
                 throw CameraControllerError.noCamerasAvailable
             }
@@ -141,11 +138,10 @@ extension CameraConfiguration {
             guard let captureSession = self.captureSession else {
                 throw CameraControllerError.captureSessionIsMissing
             }
-
+            
             self.videoOutput = AVCaptureMovieFileOutput()
             if captureSession.canAddOutput(self.videoOutput!) {
                 captureSession.addOutput(self.videoOutput!)
-               // print("SESSION OUTPUT: \(self.videoOutput!)")
             }
             
             
@@ -232,64 +228,36 @@ extension CameraConfiguration {
         self.photoCaptureCompletionBlock = completion
     }
     
-    func recordVideo(completion: @escaping ( URL?, Error?)-> Void) {
+    
+    func recordVideo(fileName: String?, completion: @escaping ( URL?, Error?)-> Void) {
         guard let captureSession = self.captureSession, captureSession.isRunning else {
             completion(nil, CameraControllerError.captureSessionIsMissing)
             return
         }
         
+        
+        
         let sharedInstance = MediaObjectSingleton.shared
-       
         
-        let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
-    
-        let saveAction = UIAlertAction(title: "OK",
-                                       style: UIAlertAction.Style.default) { [self] (action: UIAlertAction) in
-
-            if let alertTextField = alertController.textFields?.first, alertTextField.text != nil {
-                               print("And the text is... \(alertTextField.text!)!")
-                               let formattedString = alertTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).safeDatabaseKey()
-                                              print("TAG: \(formattedString)")
-                
-                sharedInstance.setUserTag(theTag: formattedString)
-                sharedInstance.setCreatedAtDate(theDate: Date())
-                
-                
-                let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-                if (formattedString.isEmpty){
-                    fileURL = paths[0].appendingPathComponent("video.mp4")
-                }else {
-                    fileURL = paths[0].appendingPathComponent("\(formattedString).mp4")
-                }
-                             
-                try? FileManager.default.removeItem(at: self.fileURL!)
-//                print("FILE NAME: \(formattedString)")
-//                print("FILE NAME URL: \(formattedString)")
-                videoOutput!.startRecording(to: fileURL!, recordingDelegate: self)
-                               self.videoRecordCompletionBlock = completion
-                               
-                               
-                           }
-         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
-                (action : UIAlertAction!) -> Void in })
-        alertController.addTextField { (textField : UITextField!) -> Void in
-                textField.placeholder = "Enter Tag Here"
-            }
-            alertController.addAction(saveAction)
-            alertController.addAction(cancelAction)
+        if let fileName = fileName {
+            let formattedString = fileName.safeDatabaseKey()
             
-        
-        
-       // self.present(alertController,nil)
-        
-        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alertController, animated: true, completion: nil)
-        
-        
-      
-        
-       // print("COMPLETION BLOCK: \(self.videoRecordCompletionBlock)")
+            sharedInstance.setUserTag(theTag: formattedString)
+            sharedInstance.setCreatedAtDate(theDate: Date())
+            
+            
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            if (formattedString.isEmpty){
+                fileURL = paths[0].appendingPathComponent("video.mp4")
+            }else {
+                fileURL = paths[0].appendingPathComponent("\(formattedString).mp4")
+            }
+            if let fileURL = fileURL{
+                try? FileManager.default.removeItem(at: fileURL)
+                videoOutput!.startRecording(to: fileURL, recordingDelegate: self)
+                self.videoRecordCompletionBlock = completion
+            }
+        }
     }
     
     func stopRecording(completion: @escaping (Error?)->Void) {
@@ -298,50 +266,20 @@ extension CameraConfiguration {
             return
         }
         self.videoOutput?.stopRecording()
-        
-      
-        
     }
 }
 
 
 func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-
+    
     if (error != nil) {
         print("Error recording movie: \(error!.localizedDescription)")
-
+        
     } else {
-        if let data = NSData(contentsOf: outputFileURL) {
-            
-//            print("OUTPUT URL: \(outputFileURL)")
-//            
-//            print("OUTPUT URL DATA: \(data)")
-//
-//            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-//            let documentDirectory = paths[0]
-//            let docURL = URL(string: documentDirectory)!
-//            let dataPath = docURL.appendingPathComponent("/DIRECTORY_NAME")
-//
-//            if !FileManager.default.fileExists(atPath: dataPath.absoluteString) {
-//              do {
-//                    try FileManager.default.createDirectory(atPath: dataPath.absoluteString, withIntermediateDirectories: true, attributes: nil)
-//                  //  self.direc toryURL = dataPath
-//                    print("Directory created successfully-\(dataPath.path)")
-//                } catch let error as NSError{
-//                    print("error creating directory -\(error.localizedDescription)");
-//                }
-//            }
-//
-//            let outputPath = "\(dataPath.path)/filename.mp4"
-//            let success = data.write(toFile: outputPath, atomically: true)
-//            // saving video into photos album.
-//            
-//            print("OUTPUT PATH: \(outputPath)")
-//            UISaveVideoAtPathToSavedPhotosAlbum(outputPath, nil, nil, nil)
-
-        }
+        
     }
 }
+
 
 extension CameraConfiguration: AVCapturePhotoCaptureDelegate {
     

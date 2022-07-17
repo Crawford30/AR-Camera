@@ -15,7 +15,6 @@ class RecordingListViewController: UIViewController {
     
     private var mediaObjects =  UserDefaults.standard.mediaObjects {
         didSet { //property observer for changes
-            print("TOTAL ARRAY COUNT: \(mediaObjects.count)")
             listVdeosCollectionView?.reloadData()
         }
     }
