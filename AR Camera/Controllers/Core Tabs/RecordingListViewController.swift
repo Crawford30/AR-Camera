@@ -10,38 +10,22 @@ import AVFoundation
 import AVKit
 
 class RecordingListViewController: UIViewController {
-    
     var mediaObjects =  [CDMediaObject]()
-    
     let myVertCVSpacing:  CGFloat = CGFloat( 8.0 )
     private var listVdeosCollectionView: UICollectionView?
     
-//    var mediaObjects =  [CDMediaObject]() {
-//        didSet { //property observer for changes
-//            listVdeosCollectionView?.reloadData()
-//        }
-//    }
-//
-    
-//    private var mediaObjects =  UserDefaults.standard.mediaObjects {
-//        didSet { //property observer for changes
-//            print("TOTAL ARRAY COUNT: \(mediaObjects.count)")
-//            listVdeosCollectionView?.reloadData()
-//        }
-//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavItem()
         self.view.backgroundColor = .blue
         configureCollectionView()
-        
         fetchVideos()
     }
     
     
+    //MARK: - Fetch Videos From Core Data
     private func fetchVideos(){
         mediaObjects = CoreDataManager.shared.fetchMediaObjects()
-        
         DispatchQueue.main.async {
             self.listVdeosCollectionView?.reloadData()
         }
@@ -61,18 +45,6 @@ class RecordingListViewController: UIViewController {
         navigationItem.rightBarButtonItems = [listVideoButton,videoButton]
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButton, style: .done,target: self, action: #selector(backButtonTapped))
-        
-        //          let phonePhoto = UIButton()
-        //          phonePhoto.setImage(UIImage(named: "list.dash"), for: UIControl.State())
-        //          phonePhoto.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        //          phonePhoto.addTarget(self, action: #selector(didTapListViedeosButton), for: .touchUpInside)
-        //
-        //          let userPhone = UIBarButtonItem()
-        //          userPhone.customView = phonePhoto
-        //
-        //          self.navigationItem.leftBarButtonItem = userPhone
-        
-        
     }
     
     
@@ -95,8 +67,8 @@ class RecordingListViewController: UIViewController {
     
     @objc func didTapListViedeosButton(sender: AnyObject){
         Utilities.vibrate()
-        //        imagePickerController.sourceType  = .photoLibrary
-        //        present(imagePickerController, animated: true, completion: nil)
+        Utilities.vibrate()
+        fetchVideos()
         
     }
     
@@ -141,8 +113,6 @@ class RecordingListViewController: UIViewController {
         listVdeosCollectionView.reloadData()
     }
     
-    
-    
 }
 
 
@@ -157,12 +127,7 @@ extension RecordingListViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell  = listVdeosCollectionView?.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as? VideoCollectionViewCell
-        
         let mediaObject = mediaObjects[indexPath.row]
-        //let createdDateString = DateFormatter.sharedDateFormatter.string(from: mediaObject.createDate!)
-        
-        print("END DATE: \(mediaObject.endDate)")
-        print("CRETE DATE: \(mediaObject.createDate)")
         let interval = mediaObject.endDate! - mediaObject.createDate!
         
         if let second = interval.second {
@@ -214,14 +179,6 @@ extension RecordingListViewController: UICollectionViewDataSource{
 
 //MARK: - UICollection View Delegate Methods
 extension RecordingListViewController:UICollectionViewDelegateFlowLayout{
-    
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //        let maxSize:CGSize = UIScreen.main.bounds.size
-    //        let itemWidth: CGFloat = maxSize.width
-    //        let itemHeight: CGFloat = maxSize.height * 0.40
-    //        return CGSize(width: itemWidth,  height: itemHeight)
-    //    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: myVertCVSpacing, left: myVertCVSpacing, bottom: myVertCVSpacing, right: myVertCVSpacing)
     }
