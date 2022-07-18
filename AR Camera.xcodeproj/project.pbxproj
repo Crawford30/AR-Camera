@@ -19,6 +19,7 @@
 		FA93C2A728859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2A528859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld */; };
 		FA93C2AC28859E95008BC2B6 /* CDMediaObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2AA28859E95008BC2B6 /* CDMediaObject+CoreDataClass.swift */; };
 		FA93C2AD28859E95008BC2B6 /* CDMediaObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2AB28859E95008BC2B6 /* CDMediaObject+CoreDataProperties.swift */; };
+		FA93C2B028859F73008BC2B6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2AF28859F73008BC2B6 /* CoreDataManager.swift */; };
 		FA96EA3D2882B446004FB338 /* URL+VideoPreviewThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA96EA3C2882B446004FB338 /* URL+VideoPreviewThumbnail.swift */; };
 		FAAFAF93286E107D002B2154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFAF92286E107C002B2154 /* AppDelegate.swift */; };
 		FAAFAF95286E107D002B2154 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFAF94286E107D002B2154 /* SceneDelegate.swift */; };
@@ -44,6 +45,7 @@
 		FA93C2A628859A77008BC2B6 /* MediaObjectDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MediaObjectDataModel.xcdatamodel; sourceTree = "<group>"; };
 		FA93C2AA28859E95008BC2B6 /* CDMediaObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMediaObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FA93C2AB28859E95008BC2B6 /* CDMediaObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMediaObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FA93C2AF28859F73008BC2B6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FA96EA3C2882B446004FB338 /* URL+VideoPreviewThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+VideoPreviewThumbnail.swift"; sourceTree = "<group>"; };
 		FAAFAF8F286E107C002B2154 /* AR Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Camera.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAAFAF92286E107C002B2154 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 				FA93C2A528859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld */,
 			);
 			path = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		FA93C2AE28859F56008BC2B6 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				FA93C2AF28859F73008BC2B6 /* CoreDataManager.swift */,
+			);
+			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
 		FA96EA3E2882B465004FB338 /* Extensions */ = {
@@ -184,6 +194,7 @@
 		FAAFAFAD286E1DD7002B2154 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA93C2AE28859F56008BC2B6 /* CoreDataManager */,
 				FA93C2A828859B24008BC2B6 /* CoreDataModel */,
 				FA633D1928814FFF00812927 /* MediaObjects.swift */,
 			);
@@ -294,6 +305,7 @@
 				FAAFAF97286E107D002B2154 /* HomeViewController.swift in Sources */,
 				FA93C2A728859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld in Sources */,
 				FADBB4892874B44500AC0D32 /* RecordingListViewController.swift in Sources */,
+				FA93C2B028859F73008BC2B6 /* CoreDataManager.swift in Sources */,
 				FA633D1C2881607B00812927 /* VideoCollectionViewCell.swift in Sources */,
 				FA75E484286F22E000F4854F /* CornerRadius.swift in Sources */,
 				FAAFAF93286E107D002B2154 /* AppDelegate.swift in Sources */,
