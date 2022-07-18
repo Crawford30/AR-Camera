@@ -43,14 +43,12 @@ class CoreDataManager{
             }
         }
         
-        
         //save the created object
         do {
             try context.save()
         } catch {
             print("Failed to save the newly created media object with error: \(error)")
         }
-        
         return mediaObject
     }
     
@@ -59,7 +57,6 @@ class CoreDataManager{
         do {
             mediaObjects  = try context.fetch(CDMediaObject.fetchRequest())
         } catch {
-            
             print("Failed to fetch media objects: \(error)")
         }
         return mediaObjects
