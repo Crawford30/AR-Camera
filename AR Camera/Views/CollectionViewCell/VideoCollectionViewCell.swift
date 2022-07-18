@@ -15,32 +15,26 @@ class VideoCollectionViewCell: UICollectionViewCell {
             //converts a data object to a UIImage
             myImageView.image = UIImage(data: imageData)
         }
-        
-        //Create Video Preview
-//        if let videoURL = mediaObject.videoURL {
-//            let image = videoURL.videoPreviewThumbnail() ?? UIImage(systemName: "heart")
-//            myImageView.image = image
-//        }
     }
     
     static let identifier = "VideoCollectionViewCell"
     
     public let myImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "house")
-        imageView.backgroundColor = .yellow
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
+        let imageView               = UIImageView()
+        imageView.image             = UIImage(systemName: "house")
+        imageView.backgroundColor   = .yellow
+        imageView.contentMode       = .scaleAspectFit
+        imageView.clipsToBounds     = true
         return imageView
     }()
     
     public let dateLabel : UILabel = {
         let label = UILabel()
         label.text = "Custom"
-        label.textColor = .white
-        label.numberOfLines = .zero
-        label.font = UIFont.boldSystemFont(ofSize: 10.0)
-        label.backgroundColor = .green
+        label.textColor            = .white
+        label.numberOfLines        = .zero
+        label.font                 = UIFont.boldSystemFont(ofSize: 14.0)
+        label.backgroundColor      =  UIColor(named: "myGreenTint")
         return label
     }()
     
@@ -48,24 +42,20 @@ class VideoCollectionViewCell: UICollectionViewCell {
     public let tagLabel : UILabel = {
         let label = UILabel()
         label.text = "Tag"
-        label.textColor = .white
-        label.numberOfLines = .zero
-        label.font = UIFont.boldSystemFont(ofSize: 10.0)
-        label.backgroundColor = .green
+        label.textColor           = .white
+        label.numberOfLines       = .zero
+        label.font                = UIFont.boldSystemFont(ofSize: 14.0)
+        label.backgroundColor     =  UIColor(named: "myGreenTint")
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemRed
-        contentView.clipsToBounds = true
+        contentView.backgroundColor    = UIColor(named: "myLightGray")
+        contentView.clipsToBounds      = true
         contentView.addSubview(myImageView)
         contentView.addSubview(dateLabel)
         contentView.addSubview(tagLabel)
-        
-        
-       
-       
     }
     
     required init?(coder: NSCoder) {
@@ -75,8 +65,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        
         tagLabel.frame = CGRect(
             x: 0,
             y: contentView.frame.size.height-40,

@@ -290,7 +290,6 @@ class RecordingListViewController: UIViewController {
 
 //MARK: - UICollection View Data Source Methods
 extension RecordingListViewController: UICollectionViewDataSource{
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return mediaObjects.count
     }
@@ -307,15 +306,11 @@ extension RecordingListViewController: UICollectionViewDataSource{
             }else {
                 cell!.dateLabel.text = " Video Duration: \(second) Seconds"
             }
-            
         }
-        
-        
+    
         if let tag = mediaObject.caption {
             cell!.tagLabel.text = " Tag: \(tag)"
         }
-        
-        
         if let videoData = mediaObject.videoData,
            let videoURL =  videoData.convertToURL()  {
             let image = videoURL.videoPreviewThumbnail() ?? UIImage(systemName: "heart")
