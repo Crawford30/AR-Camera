@@ -219,12 +219,6 @@ class CameraViewController: UIViewController {
                 }
             } else if !videoRecordingStarted {
                 videoRecordingStarted = true
-                
-                var tempID = MediaObject.init(videoURL: NSURL(fileURLWithPath: "") as URL, caption: "", id: "", createDate: Date(), endDate: Date())
-                
-                
-                // tempID = serviceID.init(serviceID: 0, categoryID: 0, serviceTitle: "", serviceImage: "", serviceImageLink: "")
-                
                 let saveAction = UIAlertAction(title: "OK",
                                                style: UIAlertAction.Style.default) { (action: UIAlertAction) in
                     if let alertTextField = self.alertController.textFields?.first, alertTextField.text != nil {

@@ -18,7 +18,7 @@ class RecordingListViewController: UIViewController {
             listVdeosCollectionView?.reloadData()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavItem()
@@ -29,70 +29,70 @@ class RecordingListViewController: UIViewController {
     
     
     //MARK: - Nav Item
-      private func setNavItem(){
-          self.navigationItem.leftItemsSupplementBackButton = true
+    private func setNavItem(){
+        self.navigationItem.leftItemsSupplementBackButton = true
         navigationItem.title = "Recording List"
-          let videoImage   = UIImage(systemName: "video.fill")!
-          let listVideos = UIImage(systemName: "list.dash")!
-          let backButton =   UIImage(systemName: "chevron.left")!
-          let videoButton = UIBarButtonItem(image: videoImage,  style: .plain, target: self, action: #selector(didTapTakeVideoButton))
-          let listVideoButton = UIBarButtonItem(image: listVideos,  style: .plain, target: self, action: #selector(didTapListViedeosButton))
-          navigationItem.rightBarButtonItems = [listVideoButton,videoButton]
-          navigationItem.hidesBackButton = true
-             navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButton, style: .done,target: self, action: #selector(backButtonTapped))
-          
-//          let phonePhoto = UIButton()
-//          phonePhoto.setImage(UIImage(named: "list.dash"), for: UIControl.State())
-//          phonePhoto.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-//          phonePhoto.addTarget(self, action: #selector(didTapListViedeosButton), for: .touchUpInside)
-//
-//          let userPhone = UIBarButtonItem()
-//          userPhone.customView = phonePhoto
-//
-//          self.navigationItem.leftBarButtonItem = userPhone
-          
-          
+        let videoImage   = UIImage(systemName: "video.fill")!
+        let listVideos = UIImage(systemName: "list.dash")!
+        let backButton =   UIImage(systemName: "chevron.left")!
+        let videoButton = UIBarButtonItem(image: videoImage,  style: .plain, target: self, action: #selector(didTapTakeVideoButton))
+        let listVideoButton = UIBarButtonItem(image: listVideos,  style: .plain, target: self, action: #selector(didTapListViedeosButton))
+        navigationItem.rightBarButtonItems = [listVideoButton,videoButton]
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButton, style: .done,target: self, action: #selector(backButtonTapped))
+        
+        //          let phonePhoto = UIButton()
+        //          phonePhoto.setImage(UIImage(named: "list.dash"), for: UIControl.State())
+        //          phonePhoto.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        //          phonePhoto.addTarget(self, action: #selector(didTapListViedeosButton), for: .touchUpInside)
+        //
+        //          let userPhone = UIBarButtonItem()
+        //          userPhone.customView = phonePhoto
+        //
+        //          self.navigationItem.leftBarButtonItem = userPhone
+        
+        
     }
     
     
     @objc func backButtonTapped(){
         Utilities.vibrate()
-    let controller = HomeViewController()
-    let navController = UINavigationController(rootViewController: controller)
-    
-    let transition = CATransition()
-    transition.duration = 0.3
-    transition.type = CATransitionType.push
-    transition.subtype = CATransitionSubtype.fromLeft
-    guard let window = view.window else { return }
-    window.layer.add(transition, forKey: kCATransition)
-    navController.modalPresentationStyle = .fullScreen
-    self.present(navController, animated: false, completion: nil)
+        let controller = HomeViewController()
+        let navController = UINavigationController(rootViewController: controller)
         
-      }
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        guard let window = view.window else { return }
+        window.layer.add(transition, forKey: kCATransition)
+        navController.modalPresentationStyle = .fullScreen
+        self.present(navController, animated: false, completion: nil)
+        
+    }
     
     
     @objc func didTapListViedeosButton(sender: AnyObject){
         Utilities.vibrate()
-//        imagePickerController.sourceType  = .photoLibrary
-//        present(imagePickerController, animated: true, completion: nil)
+        //        imagePickerController.sourceType  = .photoLibrary
+        //        present(imagePickerController, animated: true, completion: nil)
         
     }
-
+    
     @objc   func didTapTakeVideoButton(sender: AnyObject){
         Utilities.vibrate()
-    let controller = HomeViewController()
-    let navController = UINavigationController(rootViewController: controller)
-
-    let transition = CATransition()
-    transition.duration = 0.3
-    transition.type = CATransitionType.push
-    transition.subtype = CATransitionSubtype.fromLeft
-    guard let window = view.window else { return }
-    window.layer.add(transition, forKey: kCATransition)
-    navController.modalPresentationStyle = .fullScreen
-    self.present(navController, animated: false, completion: nil)
-       
+        let controller = CameraViewController()
+        let navController = UINavigationController(rootViewController: controller)
+        
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        guard let window = view.window else { return }
+        window.layer.add(transition, forKey: kCATransition)
+        navController.modalPresentationStyle = .fullScreen
+        self.present(navController, animated: false, completion: nil)
+        
     }
     
     
@@ -121,7 +121,7 @@ class RecordingListViewController: UIViewController {
     }
     
     
-
+    
 }
 
 
@@ -141,7 +141,7 @@ extension RecordingListViewController: UICollectionViewDataSource{
         //let createdDateString = DateFormatter.sharedDateFormatter.string(from: mediaObject.createDate!)
         
         
-         let interval = mediaObject.endDate! - mediaObject.createDate!
+        let interval = mediaObject.endDate! - mediaObject.createDate!
         
         if let second = interval.second {
             if(second <= 1 ){
@@ -156,15 +156,15 @@ extension RecordingListViewController: UICollectionViewDataSource{
         if let tag = mediaObject.caption {
             cell!.tagLabel.text = " Tag: \(tag)"
         }
-            
+        
         
         if let videoURL = mediaObject.videoURL {
             let image = videoURL.videoPreviewThumbnail() ?? UIImage(systemName: "heart")
             cell!.myImageView.image = image
         }
         
-      
-    
+        
+        
         return cell!
     }
     
@@ -180,7 +180,7 @@ extension RecordingListViewController: UICollectionViewDataSource{
         present(playerViewController, animated: true, completion: nil)
         player.play()
     }
-
+    
     
 }
 
@@ -189,12 +189,12 @@ extension RecordingListViewController: UICollectionViewDataSource{
 //MARK: - UICollection View Delegate Methods
 extension RecordingListViewController:UICollectionViewDelegateFlowLayout{
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let maxSize:CGSize = UIScreen.main.bounds.size
-//        let itemWidth: CGFloat = maxSize.width
-//        let itemHeight: CGFloat = maxSize.height * 0.40
-//        return CGSize(width: itemWidth,  height: itemHeight)
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    //        let maxSize:CGSize = UIScreen.main.bounds.size
+    //        let itemWidth: CGFloat = maxSize.width
+    //        let itemHeight: CGFloat = maxSize.height * 0.40
+    //        return CGSize(width: itemWidth,  height: itemHeight)
+    //    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: myVertCVSpacing, left: myVertCVSpacing, bottom: myVertCVSpacing, right: myVertCVSpacing)
