@@ -177,6 +177,7 @@ extension RecordingListViewController: UICollectionViewDataSource{
         let playerViewController = AVPlayerViewController()
         let player  = AVPlayer(url: mediaObject.videoURL!)
         playerViewController.player = player
+        playerViewController.videoGravity = .resizeAspectFill
         present(playerViewController, animated: true, completion: nil)
         player.play()
     }
