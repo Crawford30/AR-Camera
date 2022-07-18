@@ -199,13 +199,6 @@ class RecordingListViewController: UIViewController {
     @objc func playVideoAction(_ sender: UIButton) {
         Utilities.vibrate()
         sender.tag = myCurrentButton
-        
-        //        var tempServiceRequest: CDMediaObject
-        //
-        //        tempServiceRequest = CDMediaObject.init()
-        
-        
-        
         let mediaObject = mediaObjects[myCurrentButton]
         let playerViewController = AVPlayerViewController()
         let videoObject  = mediaObject.videoData
@@ -222,7 +215,7 @@ class RecordingListViewController: UIViewController {
     }
     
     
-    
+    //MARK: - TODO EDIT
     @objc func editVideoTagAction(_ sender: UIButton) {
         Utilities.vibrate()
         sender.tag = myCurrentButton
@@ -231,7 +224,7 @@ class RecordingListViewController: UIViewController {
     }
     
     
-    //MARK:-SERVICE SHARE
+    //MARK: - DELETE ACTION
     @objc func deleteVideo(sender: UIButton) {
         Utilities.vibrate()
         sender.tag = myCurrentButton
@@ -240,19 +233,15 @@ class RecordingListViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (alertAction) in
             self.deleteMediaObject(mediaObject)
-            print("Delete Button \(String(sender.tag)) pressed!")
-            
-            print("Delete Object \(mediaObject)")
             fetchVideos()
         }
         alertController.addAction(cancelAction)
         alertController.addAction(deleteAction)
         present(alertController, animated: true)
-    
         self.view.viewWithTag(1000)?.removeFromSuperview()
     }
     
-    
+    //MARK: - CANCEL
     @objc func handleCancel() {
         Utilities.vibrate()
         self.view.viewWithTag(1000)?.removeFromSuperview()
@@ -260,7 +249,7 @@ class RecordingListViewController: UIViewController {
     
     
     
-    
+    //MARK: - DELETE FUNCTION
     private func deleteMediaObject(_ mediaObject: CDMediaObject) {
         CoreDataManager.shared.deleteMediaObject(mediaObject)
         let index = mediaObjects.firstIndex(of: mediaObject)
