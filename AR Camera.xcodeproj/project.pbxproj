@@ -17,10 +17,11 @@
 		FA75E48E286F6FCB00F4854F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75E48D286F6FCB00F4854F /* CameraViewController.swift */; };
 		FA75E49028704A3B00F4854F /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75E48F28704A3B00F4854F /* PopUpWindow.swift */; };
 		FA93C2A728859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2A528859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld */; };
-		FA93C2AC28859E95008BC2B6 /* CDMediaObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2AA28859E95008BC2B6 /* CDMediaObject+CoreDataClass.swift */; };
-		FA93C2AD28859E95008BC2B6 /* CDMediaObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2AB28859E95008BC2B6 /* CDMediaObject+CoreDataProperties.swift */; };
 		FA93C2B028859F73008BC2B6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2AF28859F73008BC2B6 /* CoreDataManager.swift */; };
 		FA93C2B22885B0AF008BC2B6 /* Data+ConvertToURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2B12885B0AF008BC2B6 /* Data+ConvertToURL.swift */; };
+		FA93C2B52885BC96008BC2B6 /* CDMediaObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2B32885BC96008BC2B6 /* CDMediaObject+CoreDataClass.swift */; };
+		FA93C2B62885BC96008BC2B6 /* CDMediaObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2B42885BC96008BC2B6 /* CDMediaObject+CoreDataProperties.swift */; };
+		FA93C2B82885BD5C008BC2B6 /* MediaObjectArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2B72885BD5C008BC2B6 /* MediaObjectArray.swift */; };
 		FA96EA3D2882B446004FB338 /* URL+VideoPreviewThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA96EA3C2882B446004FB338 /* URL+VideoPreviewThumbnail.swift */; };
 		FAAFAF93286E107D002B2154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFAF92286E107C002B2154 /* AppDelegate.swift */; };
 		FAAFAF95286E107D002B2154 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFAF94286E107D002B2154 /* SceneDelegate.swift */; };
@@ -44,10 +45,11 @@
 		FA75E48D286F6FCB00F4854F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		FA75E48F28704A3B00F4854F /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		FA93C2A628859A77008BC2B6 /* MediaObjectDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MediaObjectDataModel.xcdatamodel; sourceTree = "<group>"; };
-		FA93C2AA28859E95008BC2B6 /* CDMediaObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMediaObject+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FA93C2AB28859E95008BC2B6 /* CDMediaObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMediaObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FA93C2AF28859F73008BC2B6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FA93C2B12885B0AF008BC2B6 /* Data+ConvertToURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+ConvertToURL.swift"; sourceTree = "<group>"; };
+		FA93C2B32885BC96008BC2B6 /* CDMediaObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDMediaObject+CoreDataClass.swift"; path = "../../../CDMediaObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FA93C2B42885BC96008BC2B6 /* CDMediaObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMediaObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FA93C2B72885BD5C008BC2B6 /* MediaObjectArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaObjectArray.swift; sourceTree = "<group>"; };
 		FA96EA3C2882B446004FB338 /* URL+VideoPreviewThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+VideoPreviewThumbnail.swift"; sourceTree = "<group>"; };
 		FAAFAF8F286E107C002B2154 /* AR Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Camera.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAAFAF92286E107C002B2154 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,8 +86,8 @@
 		FA93C2A828859B24008BC2B6 /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				FA93C2AB28859E95008BC2B6 /* CDMediaObject+CoreDataProperties.swift */,
-				FA93C2AA28859E95008BC2B6 /* CDMediaObject+CoreDataClass.swift */,
+				FA93C2B32885BC96008BC2B6 /* CDMediaObject+CoreDataClass.swift */,
+				FA93C2B42885BC96008BC2B6 /* CDMediaObject+CoreDataProperties.swift */,
 				FA93C2A528859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld */,
 			);
 			path = CoreDataModel;
@@ -200,6 +202,7 @@
 				FA93C2AE28859F56008BC2B6 /* CoreDataManager */,
 				FA93C2A828859B24008BC2B6 /* CoreDataModel */,
 				FA633D1928814FFF00812927 /* MediaObjects.swift */,
+				FA93C2B72885BD5C008BC2B6 /* MediaObjectArray.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			files = (
 				FAAFAF97286E107D002B2154 /* HomeViewController.swift in Sources */,
 				FA93C2A728859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld in Sources */,
+				FA93C2B62885BC96008BC2B6 /* CDMediaObject+CoreDataProperties.swift in Sources */,
 				FADBB4892874B44500AC0D32 /* RecordingListViewController.swift in Sources */,
 				FA93C2B028859F73008BC2B6 /* CoreDataManager.swift in Sources */,
 				FA633D1C2881607B00812927 /* VideoCollectionViewCell.swift in Sources */,
@@ -315,12 +319,12 @@
 				FA75E482286F205900F4854F /* CustomButton.swift in Sources */,
 				FA75E49028704A3B00F4854F /* PopUpWindow.swift in Sources */,
 				FAAFAF95286E107D002B2154 /* SceneDelegate.swift in Sources */,
+				FA93C2B82885BD5C008BC2B6 /* MediaObjectArray.swift in Sources */,
 				FA75E48A286F6F1300F4854F /* CameraConfiguration.swift in Sources */,
 				FAAFAFB2286E1EA3002B2154 /* Utilities.swift in Sources */,
+				FA93C2B52885BC96008BC2B6 /* CDMediaObject+CoreDataClass.swift in Sources */,
 				FA96EA3D2882B446004FB338 /* URL+VideoPreviewThumbnail.swift in Sources */,
-				FA93C2AD28859E95008BC2B6 /* CDMediaObject+CoreDataProperties.swift in Sources */,
 				FAAFAFA8286E1D25002B2154 /* Extensions.swift in Sources */,
-				FA93C2AC28859E95008BC2B6 /* CDMediaObject+CoreDataClass.swift in Sources */,
 				FA75E48E286F6FCB00F4854F /* CameraViewController.swift in Sources */,
 				FA633D1A28814FFF00812927 /* MediaObjects.swift in Sources */,
 				FA93C2B22885B0AF008BC2B6 /* Data+ConvertToURL.swift in Sources */,

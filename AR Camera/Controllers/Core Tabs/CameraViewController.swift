@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import CoreData
 
 enum direction {
     case right
@@ -16,7 +17,9 @@ enum direction {
 class CameraViewController: UIViewController {
     let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
     
-    private var mediaObjectsArray = [MediaObject]()
+    //   private var mediaObjectsArray = [MediaObject]()
+    
+    private var mediaObjectsArray = [CDMediaObject]()
     let docsDir: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! //documnet directory
     var popUpWindow:PopupWindow!
     var filename: String =  ""
@@ -232,12 +235,8 @@ class CameraViewController: UIViewController {
                             }
                             
                             let sharedInstance  = MediaObjectSingleton.shared
-                            
-                            let mediaObject = MediaObject.init(videoURL: url, caption: sharedInstance.getUserTag(), id: UUID().uuidString, createDate: sharedInstance.getCreatedAtDate(), endDate: Date())
+                            let mediaObject =  CoreDataManager.shared.createMediaObject( videoURL: url, caption: sharedInstance.getUserTag(), createDate: sharedInstance.getCreatedAtDate(), endDate: Date())
                             self.mediaObjectsArray.append(mediaObject)
-                            print("URL: \(mediaObject.videoURL)")
-                            UserDefaults.standard.mediaObjects = self.mediaObjectsArray
-                            
                         }
                     }
                     
@@ -253,6 +252,9 @@ class CameraViewController: UIViewController {
                 alertController.addAction(cancelAction)
                 
                 self.present(alertController, animated: true)
+                
+                
+                //                UserDefaults.standard.mediaObjects = self.mediaObjectsArray
                 
             }
         }

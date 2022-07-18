@@ -10,20 +10,41 @@ import AVFoundation
 import AVKit
 
 class RecordingListViewController: UIViewController {
+    
+    var mediaObjects =  [CDMediaObject]()
+    
     let myVertCVSpacing:  CGFloat = CGFloat( 8.0 )
     private var listVdeosCollectionView: UICollectionView?
     
-    private var mediaObjects =  UserDefaults.standard.mediaObjects {
-        didSet { //property observer for changes
-            listVdeosCollectionView?.reloadData()
-        }
-    }
+//    var mediaObjects =  [CDMediaObject]() {
+//        didSet { //property observer for changes
+//            listVdeosCollectionView?.reloadData()
+//        }
+//    }
+//
     
+//    private var mediaObjects =  UserDefaults.standard.mediaObjects {
+//        didSet { //property observer for changes
+//            print("TOTAL ARRAY COUNT: \(mediaObjects.count)")
+//            listVdeosCollectionView?.reloadData()
+//        }
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavItem()
         self.view.backgroundColor = .blue
         configureCollectionView()
+        
+        fetchVideos()
+    }
+    
+    
+    private func fetchVideos(){
+        mediaObjects = CoreDataManager.shared.fetchMediaObjects()
+        
+        DispatchQueue.main.async {
+            self.listVdeosCollectionView?.reloadData()
+        }
     }
     
     
@@ -140,7 +161,8 @@ extension RecordingListViewController: UICollectionViewDataSource{
         let mediaObject = mediaObjects[indexPath.row]
         //let createdDateString = DateFormatter.sharedDateFormatter.string(from: mediaObject.createDate!)
         
-        
+        print("END DATE: \(mediaObject.endDate)")
+        print("CRETE DATE: \(mediaObject.createDate)")
         let interval = mediaObject.endDate! - mediaObject.createDate!
         
         if let second = interval.second {
@@ -158,28 +180,31 @@ extension RecordingListViewController: UICollectionViewDataSource{
         }
         
         
-        if let videoURL = mediaObject.videoURL {
+        if let videoData = mediaObject.videoData,
+           let videoURL =  videoData.convertToURL()  {
             let image = videoURL.videoPreviewThumbnail() ?? UIImage(systemName: "heart")
             cell!.myImageView.image = image
         }
-        
-        
-        
         return cell!
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Utilities.vibrate()
-        
         print("Cell: \(indexPath.item) tapped")
         let mediaObject = mediaObjects[indexPath.row]
         let playerViewController = AVPlayerViewController()
-        let player  = AVPlayer(url: mediaObject.videoURL!)
-        playerViewController.player = player
-        playerViewController.videoGravity = .resizeAspectFill
-        present(playerViewController, animated: true, completion: nil)
-        player.play()
+        let videoObject  = mediaObject.videoData
+        
+        if let videoObject = videoObject?.convertToURL() {
+            let player  = AVPlayer(url: videoObject)
+            playerViewController.player = player
+            playerViewController.videoGravity = .resizeAspectFill
+            present(playerViewController, animated: true, completion: nil)
+            player.play()
+        }
+        
+        
     }
     
     

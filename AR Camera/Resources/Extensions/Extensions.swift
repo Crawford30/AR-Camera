@@ -132,10 +132,10 @@ extension UIColor {
 
 
 extension UserDefaults {
-    var mediaObjects: [MediaObject] {
+    var mediaObjects: [CDMediaObject] {
         get {
             guard let data = UserDefaults.standard.data(forKey: "mediaObjects") else { return [] }
-            return (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)) as? [MediaObject] ?? []
+            return (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)) as? [CDMediaObject] ?? []
         }
         set {
             UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false), forKey: "mediaObjects")

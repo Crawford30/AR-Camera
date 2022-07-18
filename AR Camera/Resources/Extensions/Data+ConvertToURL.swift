@@ -9,7 +9,7 @@ import Foundation
 
 extension Data {
   // convert Data to a URL
-    public func videoURLFromData() -> URL? {
+    public func convertToURL() -> URL? {
     let tmpFileURL = URL(fileURLWithPath: NSTemporaryDirectory())
             .appendingPathComponent("video")
             .appendingPathExtension("mp4")

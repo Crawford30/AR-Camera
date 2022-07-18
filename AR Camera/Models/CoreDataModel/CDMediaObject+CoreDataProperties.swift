@@ -20,7 +20,6 @@ extension CDMediaObject {
     @NSManaged public var createDate: Date?
     @NSManaged public var endDate: Date?
     @NSManaged public var caption: String?
-    @NSManaged public var imageData: Data?
     @NSManaged public var videoData: Data?
 
 }

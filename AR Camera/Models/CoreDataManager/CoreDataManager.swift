@@ -22,14 +22,18 @@ class CoreDataManager{
     //NSManagedObject does saving, fetching on NSManagedObject
     
     //CRUD -Create
-    func createMediaObject(_ imageData: Data, videoURL: URL?, caption:String?, endDate: Date?)  -> CDMediaObject {
+    func createMediaObject(videoURL: URL?, caption:String?, createDate: Date?, endDate: Date?)  -> CDMediaObject {
         let mediaObject  = CDMediaObject(entity: CDMediaObject.entity(), insertInto: context)
-        mediaObject.createDate = Date()
+       
         mediaObject.id = UUID().uuidString
-        mediaObject.imageData = imageData
+//        mediaObject.imageData = imageData
         if let caption = caption {
             mediaObject.caption = caption
         }
+        if let createDate = createDate {
+            mediaObject.createDate = createDate
+        }
+        
         if let endDate = endDate {
             mediaObject.endDate = endDate
         }

@@ -5,10 +5,9 @@
         <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="videoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
     </entity>
     <elements>
-        <element name="CDMediaObject" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="CDMediaObject" positionX="-63" positionY="-18" width="128" height="104"/>
     </elements>
 </model>
