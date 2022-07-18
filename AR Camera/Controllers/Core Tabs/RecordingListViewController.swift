@@ -236,7 +236,7 @@ class RecordingListViewController: UIViewController {
         Utilities.vibrate()
         sender.tag = myCurrentButton
         let mediaObject = mediaObjects[myCurrentButton]
-        let alertController = UIAlertController(title: "Delete Media", message: "Are you sure that you want to delete this item. Please, note that this action can not be undone.", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Delete Media", message: "Are you sure that you want to delete this item? Please, note that this action can not be undone.", preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (alertAction) in
             self.deleteMediaObject(mediaObject)
