@@ -111,14 +111,14 @@ class RecordingListViewController: UIViewController {
         let buttonGap:CGFloat  = 10.0 // vertical gap between buttons
         
         //-----------------------------------------------------------------------------------
-        let bgLabel: UILabel    = UILabel.init()
-        bgLabel.backgroundColor = UIColor.white
-        var bgRect: CGRect      = CGRect.zero
-        bgRect.origin.x         = listVdeosCollectionView!.frame.origin.x + 20
-        bgRect.origin.y         = 0
-        bgRect.size.width       = listVdeosCollectionView!.frame.size.width - 60.0
-        bgRect.size.height      = ( buttonRect.size.height * 4.0 ) + ( buttonGap * 5.0 )
-        bgLabel.frame           = bgRect
+        let bgLabel: UILabel       = UILabel.init()
+        bgLabel.backgroundColor    = UIColor.white
+        var bgRect: CGRect         = CGRect.zero
+        bgRect.origin.x            = listVdeosCollectionView!.frame.origin.x + 20
+        bgRect.origin.y            = 0
+        bgRect.size.width          = listVdeosCollectionView!.frame.size.width - 60.0
+        bgRect.size.height         = ( buttonRect.size.height * 4.0 ) + ( buttonGap * 5.0 )
+        bgLabel.frame              = bgRect
         tempView.addSubview( bgLabel )
         bgLabel.layer.cornerRadius = 10.0
         bgLabel.clipsToBounds      = true
@@ -170,19 +170,19 @@ class RecordingListViewController: UIViewController {
         deleteVideoButton.setTitle("Delete", for: .normal )
         deleteVideoButton.addTarget(self, action: #selector( self.deleteVideo ), for: .touchUpInside )
         tempView.addSubview( deleteVideoButton )
-        deleteVideoButton.layer.cornerRadius      = 8.0
-        deleteVideoButton.clipsToBounds           = true
+        deleteVideoButton.layer.cornerRadius        = 8.0
+        deleteVideoButton.clipsToBounds             = true
         deleteVideoButton.frame = buttonRect
         buttonRect.origin.y += buttonRect.size.height + buttonGap
         
         
         //-----------------------------------------------------------------------------------
         
-        let cancelMenuButton: UIButton             = UIButton.init()
-        cancelMenuButton.backgroundColor           = UIColor(named: "myLightGray")
+        let cancelMenuButton: UIButton              = UIButton.init()
+        cancelMenuButton.backgroundColor            = UIColor(named: "myLightGray")
         cancelMenuButton.setTitleColor( UIColor.red, for: .normal)
-        cancelMenuButton.titleLabel?.textAlignment = .center
-        cancelMenuButton.titleLabel?.font          = UIFont.boldSystemFont(ofSize: 20.0 )
+        cancelMenuButton.titleLabel?.textAlignment  = .center
+        cancelMenuButton.titleLabel?.font           = UIFont.boldSystemFont(ofSize: 20.0 )
         cancelMenuButton.setTitle("Cancel", for: .normal )
         cancelMenuButton.addTarget(self, action:#selector( self.handleCancel ), for: .touchUpInside )
         tempView.addSubview( cancelMenuButton )
