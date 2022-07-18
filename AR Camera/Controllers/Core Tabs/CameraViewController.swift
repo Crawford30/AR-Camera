@@ -232,6 +232,7 @@ class CameraViewController: UIViewController {
                             }
                             
                             let sharedInstance  = MediaObjectSingleton.shared
+                            
                             let mediaObject = MediaObject.init(videoURL: url, caption: sharedInstance.getUserTag(), id: UUID().uuidString, createDate: sharedInstance.getCreatedAtDate(), endDate: Date())
                             self.mediaObjectsArray.append(mediaObject)
                             print("URL: \(mediaObject.videoURL)")
