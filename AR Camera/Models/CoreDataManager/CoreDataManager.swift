@@ -24,9 +24,9 @@ class CoreDataManager{
     //CRUD -Create
     func createMediaObject(videoURL: URL?, caption:String?, createDate: Date?, endDate: Date?)  -> CDMediaObject {
         let mediaObject  = CDMediaObject(entity: CDMediaObject.entity(), insertInto: context)
-       
+        
         mediaObject.id = UUID().uuidString
-//        mediaObject.imageData = imageData
+        //        mediaObject.imageData = imageData
         if let caption = caption {
             mediaObject.caption = caption
         }
@@ -69,6 +69,18 @@ class CoreDataManager{
     //Update
     
     //Delete
+    
+    public func deleteMediaObject(_ mediaObject: CDMediaObject) {
+        context.delete(mediaObject)
+        do {
+            try context.save()
+        } catch {
+            print("failed to delete object with error: \(error)")
+        }
+    
+    }
+    
+    
     
     
 }

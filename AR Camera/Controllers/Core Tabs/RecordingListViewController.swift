@@ -234,9 +234,22 @@ class RecordingListViewController: UIViewController {
     //MARK:-SERVICE SHARE
     @objc func deleteVideo(sender: UIButton) {
         Utilities.vibrate()
-        print("Delete Button \(String(sender.tag)) pressed!")
+        sender.tag = myCurrentButton
+        let mediaObject = mediaObjects[myCurrentButton]
+        let alertController = UIAlertController(title: "Delete Media", message: "Are you sure that you want to delete this item. Please, note that this action can not be undone.", preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (alertAction) in
+            self.deleteMediaObject(mediaObject)
+            print("Delete Button \(String(sender.tag)) pressed!")
+            
+            print("Delete Object \(mediaObject)")
+            fetchVideos()
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        present(alertController, animated: true)
+    
         self.view.viewWithTag(1000)?.removeFromSuperview()
-        
     }
     
     
@@ -247,6 +260,14 @@ class RecordingListViewController: UIViewController {
     
     
     
+    
+    private func deleteMediaObject(_ mediaObject: CDMediaObject) {
+        CoreDataManager.shared.deleteMediaObject(mediaObject)
+        let index = mediaObjects.firstIndex(of: mediaObject)
+        if let index = index {
+            mediaObjects.remove(at: index)
+        }
+    }
     
     
     
