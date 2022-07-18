@@ -16,6 +16,7 @@
 		FA75E48A286F6F1300F4854F /* CameraConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75E489286F6F1300F4854F /* CameraConfiguration.swift */; };
 		FA75E48E286F6FCB00F4854F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75E48D286F6FCB00F4854F /* CameraViewController.swift */; };
 		FA75E49028704A3B00F4854F /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75E48F28704A3B00F4854F /* PopUpWindow.swift */; };
+		FA93C2A728859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA93C2A528859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld */; };
 		FA96EA3D2882B446004FB338 /* URL+VideoPreviewThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA96EA3C2882B446004FB338 /* URL+VideoPreviewThumbnail.swift */; };
 		FAAFAF93286E107D002B2154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFAF92286E107C002B2154 /* AppDelegate.swift */; };
 		FAAFAF95286E107D002B2154 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFAF94286E107D002B2154 /* SceneDelegate.swift */; };
@@ -38,6 +39,7 @@
 		FA75E489286F6F1300F4854F /* CameraConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraConfiguration.swift; sourceTree = "<group>"; };
 		FA75E48D286F6FCB00F4854F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		FA75E48F28704A3B00F4854F /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
+		FA93C2A628859A77008BC2B6 /* MediaObjectDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MediaObjectDataModel.xcdatamodel; sourceTree = "<group>"; };
 		FA96EA3C2882B446004FB338 /* URL+VideoPreviewThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+VideoPreviewThumbnail.swift"; sourceTree = "<group>"; };
 		FAAFAF8F286E107C002B2154 /* AR Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Camera.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAAFAF92286E107C002B2154 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				FA633D1928814FFF00812927 /* MediaObjects.swift */,
+				FA93C2A528859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAAFAF97286E107D002B2154 /* HomeViewController.swift in Sources */,
+				FA93C2A728859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld in Sources */,
 				FADBB4892874B44500AC0D32 /* RecordingListViewController.swift in Sources */,
 				FA633D1C2881607B00812927 /* VideoCollectionViewCell.swift in Sources */,
 				FA75E484286F22E000F4854F /* CornerRadius.swift in Sources */,
@@ -516,6 +520,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FA93C2A528859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FA93C2A628859A77008BC2B6 /* MediaObjectDataModel.xcdatamodel */,
+			);
+			currentVersion = FA93C2A628859A77008BC2B6 /* MediaObjectDataModel.xcdatamodel */;
+			path = MediaObjectDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FAAFAF87286E107C002B2154 /* Project object */;
 }
