@@ -8,22 +8,15 @@
 import UIKit
 import Photos
 
+enum direction {
+    case right
+    case left
+}
+
 class CameraViewController: UIViewController {
-    
-    
-    
     let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
     
-    //private var mediaObjectsArray = [MediaObject]()
-    
-    
-    var mediaObjectsArray:    [ MediaObject ] = []
-    
-    enum direction {
-        case right
-        case left
-    }
-    
+    private var mediaObjectsArray = [MediaObject]()
     let docsDir: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! //documnet directory
     var popUpWindow:PopupWindow!
     var filename: String =  ""
