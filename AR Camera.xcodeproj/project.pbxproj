@@ -441,7 +441,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AR Camera/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos";
-				INFOPLIST_KEY_NSMainNibFile = Main;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To Add Photo To Photos Library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Save Photo";
@@ -474,7 +473,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AR Camera/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos";
-				INFOPLIST_KEY_NSMainNibFile = Main;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To Add Photo To Photos Library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Save Photo";
