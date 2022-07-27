@@ -264,10 +264,8 @@ extension UpdateTagViewController: UITextFieldDelegate{
         
         if(textField == tagTextField) {
             didTapUpdate()
-            
         }
-        
-        
+    
         return true
     }
 }
