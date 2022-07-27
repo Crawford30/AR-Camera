@@ -10,13 +10,7 @@ import CoreData
 
 class UpdateTagViewController: UIViewController {
     var videoID:String = ""
-    
-    
-    
-    struct Constants {
-        static let cornerRadius: CGFloat = 8.0
-    }
-    
+        
     private let tagTextField: UITextField = {
         let field = UITextField()
         field.placeholder = "Tag"
@@ -58,28 +52,24 @@ class UpdateTagViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getSentData()
         view.backgroundColor = UIColor(named: "myLightGray")
         setNavItem()
         //Delegates for Textfields when the user taps enter button
         tagTextField.delegate = self
-        
         addSubviews()
-        
-        
         updateButton.addTarget(self, action: #selector(didTapUpdate), for: .touchUpInside)
         
     }
     
     
+    
+    //MARK: - GET SENT DATA
     func getSentData() {
         let shared = MediaObjectSingleton.shared
         let tag = shared.getUserTag()
         videoID = shared.getID()
-        
         tagTextField.text = tag
-        
         print("VIDEO ID: \(videoID)")
     }
     
@@ -104,7 +94,6 @@ class UpdateTagViewController: UIViewController {
             height: 52.0
         )
         
-        
         //=====Frame for Login Button
         updateButton.frame = CGRect(
             x: 25,
@@ -113,13 +102,11 @@ class UpdateTagViewController: UIViewController {
             height: 52.0
         )
         configureHeaderView()
-        
     }
     
     
-    //MARK:- Header View
+    //MARK: - Header View
     private func configureHeaderView(){
-        
         //Should only have one subview by default
         guard headerView.subviews.count == 1 else {
             return
@@ -133,7 +120,6 @@ class UpdateTagViewController: UIViewController {
         backgroundView.frame = headerView.bounds
         
         //=====Add  logo
-        
         let logoImageView = UIImageView(image: UIImage(named: "text"))
         headerView.addSubview(logoImageView)
         logoImageView.contentMode = .scaleAspectFit
@@ -142,33 +128,15 @@ class UpdateTagViewController: UIViewController {
             y: view.safeAreaInsets.top,
             width: headerView.width/2.0,
             height: headerView.height-view.safeAreaInsets.top)
-        
-        
     }
     
-    //MARK:- Add SubViews
+    //MARK: - Add SubViews
     private func addSubviews(){
         view.addSubview(tagTextField)
         view.addSubview(updateButton)
         view.addSubview(headerView)
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     //MARK: - Nav Item
     private func setNavItem(){
@@ -186,7 +154,7 @@ class UpdateTagViewController: UIViewController {
     
     
     
-    
+    //MARK: - BACK BUTTON TAPPED
     @objc func backButtonTapped(){
         Utilities.vibrate()
         let controller = HomeViewController()
@@ -203,19 +171,16 @@ class UpdateTagViewController: UIViewController {
         
     }
     
-    
+    //MARK: - LIST VIDEO ACTION
     @objc func didTapListViedeosButton(sender: AnyObject){
         Utilities.vibrate()
-        
         navigateToRecordingList()
-        
     }
     
-    
+    //MARK: - GO TO RECORDING LIST SCREEN
     private func navigateToRecordingList(){
         let controller = RecordingListViewController()
         let navController = UINavigationController(rootViewController: controller)
-        
         let transition = CATransition()
         transition.duration = 0.3
         transition.type = CATransitionType.push
@@ -226,11 +191,12 @@ class UpdateTagViewController: UIViewController {
         self.present(navController, animated: false, completion: nil)
     }
     
+    
+    //MARK: - RECORD VIDEO ACTION
     @objc   func didTapTakeVideoButton(sender: AnyObject){
         Utilities.vibrate()
         let controller = CameraViewController()
         let navController = UINavigationController(rootViewController: controller)
-        
         let transition = CATransition()
         transition.duration = 0.3
         transition.type = CATransitionType.push
@@ -239,12 +205,11 @@ class UpdateTagViewController: UIViewController {
         window.layer.add(transition, forKey: kCATransition)
         navController.modalPresentationStyle = .fullScreen
         self.present(navController, animated: false, completion: nil)
-        
     }
     
     
     
-    
+ //MARK: - EDIT TAG ACTION
     @objc private func didTapUpdate(){
         print("Tap Edit")
         Utilities.vibrate()
@@ -252,12 +217,8 @@ class UpdateTagViewController: UIViewController {
             CoreDataManager.shared.update(identifier: videoID, tag: tag.safeDatabaseKey())
         }
         navigateToRecordingList()
-        
-        
     }
-    
 }
-
 
 extension UpdateTagViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -265,7 +226,6 @@ extension UpdateTagViewController: UITextFieldDelegate{
         if(textField == tagTextField) {
             didTapUpdate()
         }
-    
         return true
     }
 }
