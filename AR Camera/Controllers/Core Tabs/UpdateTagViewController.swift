@@ -52,12 +52,7 @@ class UpdateTagViewController: UIViewController {
         return header
     }()
     
-    
-    
-    
-    
-    
-
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         getTag()
@@ -65,7 +60,7 @@ class UpdateTagViewController: UIViewController {
         setNavItem()
         //Delegates for Textfields when the user taps enter button
         tagTextField.delegate = self
-    
+
         addSubviews()
     
     }
@@ -77,9 +72,7 @@ class UpdateTagViewController: UIViewController {
         tagTextField.text = tag
     }
     
-    
-    
-    
+  
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -100,12 +93,7 @@ class UpdateTagViewController: UIViewController {
             height: 52.0
         )
         
-        
-        
-       
-        
-        
-        
+    
         //=====Frame for Login Button
         updateButton.frame = CGRect(
             x: 25,
@@ -113,11 +101,6 @@ class UpdateTagViewController: UIViewController {
             width: view.width-50,
             height: 52.0
         )
-        
-        
-        
-    
-        
         configureHeaderView()
         
     }
