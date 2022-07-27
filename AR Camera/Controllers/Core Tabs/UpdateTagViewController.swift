@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import CoreData
 
 class UpdateTagViewController: UIViewController {
+    var videoID:String = ""
+    
+    
     
     struct Constants {
         static let cornerRadius: CGFloat = 8.0
-        
     }
     
     private let tagTextField: UITextField = {
@@ -30,7 +33,7 @@ class UpdateTagViewController: UIViewController {
         return field
     }()
     
-   
+    
     
     
     private let updateButton: UIButton = {
@@ -42,37 +45,45 @@ class UpdateTagViewController: UIViewController {
         return button
     }()
     
-   
+    
     
     private let headerView: UIView = {
         let header =  UIView()
-          header.clipsToBounds = true //so that nothing overflows
-          let bgImageView = UIImageView(image: UIImage(named: "gradient"))
+        header.clipsToBounds = true //so that nothing overflows
+        let bgImageView = UIImageView(image: UIImage(named: "gradient"))
         header.addSubview(bgImageView)
         return header
     }()
     
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        getTag()
+        
+        getSentData()
         view.backgroundColor = UIColor(named: "myLightGray")
         setNavItem()
         //Delegates for Textfields when the user taps enter button
         tagTextField.delegate = self
-
+        
         addSubviews()
-    
+        
+        
+        updateButton.addTarget(self, action: #selector(didTapUpdate), for: .touchUpInside)
+        
     }
     
     
-    func getTag() {
+    func getSentData() {
         let shared = MediaObjectSingleton.shared
         let tag = shared.getUserTag()
+        videoID = shared.getID()
+        
         tagTextField.text = tag
+        
+        print("VIDEO ID: \(videoID)")
     }
     
-  
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -93,7 +104,7 @@ class UpdateTagViewController: UIViewController {
             height: 52.0
         )
         
-    
+        
         //=====Frame for Login Button
         updateButton.frame = CGRect(
             x: 25,
@@ -147,16 +158,16 @@ class UpdateTagViewController: UIViewController {
     
     
     
-   
     
     
-  
     
     
-   
     
-
-   
+    
+    
+    
+    
+    
     
     
     //MARK: - Nav Item
@@ -195,6 +206,13 @@ class UpdateTagViewController: UIViewController {
     
     @objc func didTapListViedeosButton(sender: AnyObject){
         Utilities.vibrate()
+        
+        navigateToRecordingList()
+        
+    }
+    
+    
+    private func navigateToRecordingList(){
         let controller = RecordingListViewController()
         let navController = UINavigationController(rootViewController: controller)
         
@@ -206,8 +224,6 @@ class UpdateTagViewController: UIViewController {
         window.layer.add(transition, forKey: kCATransition)
         navController.modalPresentationStyle = .fullScreen
         self.present(navController, animated: false, completion: nil)
-       
-        
     }
     
     @objc   func didTapTakeVideoButton(sender: AnyObject){
@@ -225,7 +241,21 @@ class UpdateTagViewController: UIViewController {
         self.present(navController, animated: false, completion: nil)
         
     }
-
+    
+    
+    
+    
+    @objc private func didTapUpdate(){
+        print("Tap Edit")
+        Utilities.vibrate()
+        if let tag =  tagTextField.text{
+            CoreDataManager.shared.update(identifier: videoID, tag: tag.safeDatabaseKey())
+        }
+        navigateToRecordingList()
+        
+        
+    }
+    
 }
 
 
@@ -233,10 +263,10 @@ extension UpdateTagViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if(textField == tagTextField) {
-           
+            didTapUpdate()
             
         }
-       
+        
         
         return true
     }

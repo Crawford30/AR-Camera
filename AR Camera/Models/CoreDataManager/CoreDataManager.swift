@@ -77,7 +77,38 @@ class CoreDataManager{
         } catch {
             print("failed to delete object with error: \(error)")
         }
+        
+    }
     
+    
+    
+    
+    public  func update(identifier: String,tag:String) {
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "CDMediaObject")
+        let predicate = NSPredicate(format: "id = '\(identifier)'")
+        fetchRequest.predicate = predicate
+        do
+        {
+            let object = try context.fetch(fetchRequest)
+            if object.count == 1
+            {
+                let objectUpdate = object.first as! NSManagedObject
+                objectUpdate.setValue(tag, forKey: "caption")
+                do{
+                    try context.save()
+                }
+                catch
+                {
+                    print(error)
+                }
+            }
+        }
+        catch
+        {
+            print(error)
+        }
     }
     
     

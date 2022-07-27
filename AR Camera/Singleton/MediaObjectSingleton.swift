@@ -11,10 +11,12 @@ import UIKit
 class MediaObjectSingleton {
     static let shared = MediaObjectSingleton()
     private var tag:  String
+    private var id:  String
     private var createdAtDate: Date
     
     private  init() { //A  private initilaizer, means it can only be called this class
         tag = ""
+        id = ""
         createdAtDate = Date()
     } //not to be accessed anywhere apart from this class
     
@@ -26,6 +28,16 @@ class MediaObjectSingleton {
     func getUserTag() -> String {
         return tag
     }
+    
+    
+    func setID(theID: String) -> () {
+        id = theID
+    }
+    
+    func getID() -> String {
+        return id
+    }
+    
     
     func setCreatedAtDate(theDate: Date) -> () {
         createdAtDate = theDate

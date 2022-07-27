@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import UIKit
 
 class  Utilities {
@@ -47,6 +48,9 @@ class  Utilities {
         notificationGenerator.prepare() //remove delay
         notificationGenerator.notificationOccurred(.error)
     }
+    
+    
+    
     
  
 }

@@ -224,6 +224,11 @@ class RecordingListViewController: UIViewController {
         if let tag = mediaObject.caption{
             shared.setUserTag(theTag: tag)
         }
+        
+        if let id = mediaObject.id{
+            shared.setID(theID: id)
+        }
+      
        
         let controller = UpdateTagViewController()
         let navController = UINavigationController(rootViewController: controller)
