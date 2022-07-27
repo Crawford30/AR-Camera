@@ -171,3 +171,25 @@ extension Date {
             return (month: month, day: day, hour: hour, minute: minute, second: second)
         }
  }
+
+
+extension UIViewController {
+
+    /**
+     *  Height of status bar + navigation bar (if navigation bar exist)
+     */
+
+    var topbarHeight: CGFloat {
+        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
+            (self.navigationController?.navigationBar.frame.height ?? 0.0)
+    }
+}
+
+
+extension UINavigationController {
+  static public func navBarHeight() -> CGFloat {
+    let nVc = UINavigationController(rootViewController: UIViewController(nibName: nil, bundle: nil))
+    let navBarHeight = nVc.navigationBar.frame.size.height
+    return navBarHeight
+  }
+}

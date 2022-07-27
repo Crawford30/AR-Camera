@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             let homeVC = HomeViewController()
+//            homeVC.navigationItem.title = "AR Camera"
             window.rootViewController = homeVC
             self.window = window
             window.makeKeyAndVisible()

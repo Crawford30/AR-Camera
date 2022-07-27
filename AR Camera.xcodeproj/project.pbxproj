@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA04D37028910A64000CA470 /* UpdateTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA04D36F28910A64000CA470 /* UpdateTagViewController.swift */; };
+		FA04D3722891234B000CA470 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA04D3712891234B000CA470 /* CustomLabel.swift */; };
 		FA633D1A28814FFF00812927 /* MediaObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA633D1928814FFF00812927 /* MediaObjects.swift */; };
 		FA633D1C2881607B00812927 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA633D1B2881607B00812927 /* VideoCollectionViewCell.swift */; };
 		FA633D2028819F5700812927 /* MediaObjectSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA633D1F28819F5700812927 /* MediaObjectSingleton.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA04D36F28910A64000CA470 /* UpdateTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTagViewController.swift; sourceTree = "<group>"; };
+		FA04D3712891234B000CA470 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		FA633D1928814FFF00812927 /* MediaObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaObjects.swift; sourceTree = "<group>"; };
 		FA633D1B2881607B00812927 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA633D1F28819F5700812927 /* MediaObjectSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaObjectSingleton.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				FA75E487286F6E1D00F4854F /* CameraViewController.xib */,
 				FA75E48D286F6FCB00F4854F /* CameraViewController.swift */,
 				FADBB4882874B44500AC0D32 /* RecordingListViewController.swift */,
+				FA04D36F28910A64000CA470 /* UpdateTagViewController.swift */,
 			);
 			path = "Core Tabs";
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 		FAAFAFB0286E1E41002B2154 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FA04D3712891234B000CA470 /* CustomLabel.swift */,
 				FAAFAFB1286E1EA3002B2154 /* Utilities.swift */,
 				FA75E483286F22E000F4854F /* CornerRadius.swift */,
 			);
@@ -306,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAAFAF97286E107D002B2154 /* HomeViewController.swift in Sources */,
+				FA04D37028910A64000CA470 /* UpdateTagViewController.swift in Sources */,
 				FA93C2A728859A77008BC2B6 /* MediaObjectDataModel.xcdatamodeld in Sources */,
 				FA93C2B62885BC96008BC2B6 /* CDMediaObject+CoreDataProperties.swift in Sources */,
 				FADBB4892874B44500AC0D32 /* RecordingListViewController.swift in Sources */,
@@ -317,6 +324,7 @@
 				FA75E49028704A3B00F4854F /* PopUpWindow.swift in Sources */,
 				FAAFAF95286E107D002B2154 /* SceneDelegate.swift in Sources */,
 				FA75E48A286F6F1300F4854F /* CameraConfiguration.swift in Sources */,
+				FA04D3722891234B000CA470 /* CustomLabel.swift in Sources */,
 				FAAFAFB2286E1EA3002B2154 /* Utilities.swift in Sources */,
 				FA93C2B52885BC96008BC2B6 /* CDMediaObject+CoreDataClass.swift in Sources */,
 				FA96EA3D2882B446004FB338 /* URL+VideoPreviewThumbnail.swift in Sources */,

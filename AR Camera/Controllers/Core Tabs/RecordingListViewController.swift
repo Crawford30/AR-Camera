@@ -40,11 +40,11 @@ class RecordingListViewController: UIViewController {
         self.navigationItem.leftItemsSupplementBackButton = true
         navigationItem.title = "Recording List"
         let videoImage   = UIImage(systemName: "video.fill")!
-        let listVideos = UIImage(systemName: "list.dash")!
+        let refresh = UIImage(systemName: "arrow.counterclockwise.icloud")!
         let backButton =   UIImage(systemName: "chevron.left")!
         let videoButton = UIBarButtonItem(image: videoImage,  style: .plain, target: self, action: #selector(didTapTakeVideoButton))
-        let listVideoButton = UIBarButtonItem(image: listVideos,  style: .plain, target: self, action: #selector(didTapListViedeosButton))
-        navigationItem.rightBarButtonItems = [listVideoButton,videoButton]
+        let refreshButton = UIBarButtonItem(image: refresh,  style: .plain, target: self, action: #selector(didTapListViedeosButton))
+        navigationItem.rightBarButtonItems = [refreshButton,videoButton]
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButton, style: .done,target: self, action: #selector(backButtonTapped))
     }
@@ -68,7 +68,6 @@ class RecordingListViewController: UIViewController {
     
     
     @objc func didTapListViedeosButton(sender: AnyObject){
-        Utilities.vibrate()
         Utilities.vibrate()
         fetchVideos()
         
@@ -219,6 +218,25 @@ class RecordingListViewController: UIViewController {
     @objc func editVideoTagAction(_ sender: UIButton) {
         Utilities.vibrate()
         sender.tag = myCurrentButton
+        let mediaObject = mediaObjects[myCurrentButton]
+        
+        
+        
+        let controller = UpdateTagViewController()
+        let navController = UINavigationController(rootViewController: controller)
+        
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        guard let window = view.window else { return }
+        window.layer.add(transition, forKey: kCATransition)
+        navController.modalPresentationStyle = .fullScreen
+        self.present(navController, animated: false, completion: nil)
+        
+        print("TAG: \(mediaObject.caption)")
+        
+      
         self.view.viewWithTag(1000)?.removeFromSuperview()
         
     }
@@ -324,6 +342,10 @@ extension RecordingListViewController: UICollectionViewDataSource{
         myCurrentButton = indexPath.item
         prepCustomMenu()
     }
+    
+    
+    
+   
 }
 
 
