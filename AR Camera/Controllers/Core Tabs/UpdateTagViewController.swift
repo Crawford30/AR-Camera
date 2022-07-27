@@ -60,18 +60,21 @@ class UpdateTagViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getTag()
         view.backgroundColor = UIColor(named: "myLightGray")
         setNavItem()
-
         //Delegates for Textfields when the user taps enter button
         tagTextField.delegate = self
-      
-        
+    
         addSubviews()
-        
-        // Do any additional setup after loading the view.
-       
+    
+    }
+    
+    
+    func getTag() {
+        let shared = MediaObjectSingleton.shared
+        let tag = shared.getUserTag()
+        tagTextField.text = tag
     }
     
     

@@ -220,10 +220,14 @@ class RecordingListViewController: UIViewController {
         sender.tag = myCurrentButton
         let mediaObject = mediaObjects[myCurrentButton]
         
-        
-        
+        let shared = MediaObjectSingleton.shared
+        if let tag = mediaObject.caption{
+            shared.setUserTag(theTag: tag)
+        }
+       
         let controller = UpdateTagViewController()
         let navController = UINavigationController(rootViewController: controller)
+        
         
         let transition = CATransition()
         transition.duration = 0.3
@@ -234,7 +238,7 @@ class RecordingListViewController: UIViewController {
         navController.modalPresentationStyle = .fullScreen
         self.present(navController, animated: false, completion: nil)
         
-        print("TAG: \(mediaObject.caption)")
+//        print("TAG: \(mediaObject.caption)")
         
       
         self.view.viewWithTag(1000)?.removeFromSuperview()
