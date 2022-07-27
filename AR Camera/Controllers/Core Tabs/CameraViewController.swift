@@ -17,8 +17,6 @@ enum direction {
 class CameraViewController: UIViewController {
     let alertController = UIAlertController(title: "Enter Tag", message: "", preferredStyle: UIAlertController.Style.alert)
     
-    //   private var mediaObjectsArray = [MediaObject]()
-    
     private var mediaObjectsArray = [CDMediaObject]()
     let docsDir: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! //documnet directory
     var popUpWindow:PopupWindow!
@@ -61,18 +59,15 @@ class CameraViewController: UIViewController {
                 (newStatus) in
                 print("status is \(newStatus)")
                 if newStatus ==  PHAuthorizationStatus.authorized {
-                    /* do stuff here */
                     completion()
                     print("success")
                 }
             })
-            print("It is not determined until now")
+            
         case .restricted, .denied:
-            // same same
-            print("User do not have access to photo album.")
+            showToast(message: "User does not have access to photo album", fontSize: 14.0)
         case .denied:
-            // same same
-            print("User has denied the permission.")
+            showToast(message: "User has dinied permssion", fontSize: 14.0)
         default: return
         }
         

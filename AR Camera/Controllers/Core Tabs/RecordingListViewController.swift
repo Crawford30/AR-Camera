@@ -54,7 +54,6 @@ class RecordingListViewController: UIViewController {
         Utilities.vibrate()
         let controller = HomeViewController()
         let navController = UINavigationController(rootViewController: controller)
-        
         let transition = CATransition()
         transition.duration = 0.3
         transition.type = CATransitionType.push
@@ -70,7 +69,6 @@ class RecordingListViewController: UIViewController {
     @objc func didTapListViedeosButton(sender: AnyObject){
         Utilities.vibrate()
         fetchVideos()
-        
     }
     
     @objc   func didTapTakeVideoButton(sender: AnyObject){
@@ -228,12 +226,10 @@ class RecordingListViewController: UIViewController {
         if let id = mediaObject.id{
             shared.setID(theID: id)
         }
-      
-       
+        
+        
         let controller = UpdateTagViewController()
         let navController = UINavigationController(rootViewController: controller)
-        
-        
         let transition = CATransition()
         transition.duration = 0.3
         transition.type = CATransitionType.push
@@ -242,10 +238,6 @@ class RecordingListViewController: UIViewController {
         window.layer.add(transition, forKey: kCATransition)
         navController.modalPresentationStyle = .fullScreen
         self.present(navController, animated: false, completion: nil)
-        
-//        print("TAG: \(mediaObject.caption)")
-        
-      
         self.view.viewWithTag(1000)?.removeFromSuperview()
         
     }
@@ -307,7 +299,6 @@ class RecordingListViewController: UIViewController {
         listVdeosCollectionView.delegate = self
         view.addSubview(listVdeosCollectionView)
         listVdeosCollectionView.frame = view.bounds
-        
         listVdeosCollectionView.reloadData()
     }
     
@@ -334,7 +325,7 @@ extension RecordingListViewController: UICollectionViewDataSource{
                 cell!.dateLabel.text = " Video Duration: \(second) Seconds"
             }
         }
-    
+        
         if let tag = mediaObject.caption {
             cell!.tagLabel.text = " Tag: \(tag)"
         }
@@ -352,9 +343,6 @@ extension RecordingListViewController: UICollectionViewDataSource{
         prepCustomMenu()
     }
     
-    
-    
-   
 }
 
 
